@@ -1,5 +1,5 @@
 <script>
-	import { read_XLSX } from './read_XLSX';
+	import { read_XLSX } from '$lib/read_XLSX';
 
 	/** @type {{on_success: (bib: import('$lib/types').Living_Bibliography) => void}} */
 	let { on_success } = $props();
@@ -26,12 +26,11 @@
 			const read_result = await read_XLSX(workbook);
 
 			if (read_result.ok) {
-                errors = [];
-                return on_success(read_result.data);
-            } else {
-                errors = read_result.errors;
-            }
-
+				errors = [];
+				return on_success(read_result.data);
+			} else {
+				errors = read_result.errors;
+			}
 		});
 
 		reader.readAsArrayBuffer(files[0]);

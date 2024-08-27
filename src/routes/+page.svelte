@@ -1,6 +1,6 @@
 <script>
-	import { required_entry_keys } from '$lib/constants';
-	import FileInput from '$lib/File_Input.svelte';
+	import Bibliography from './Bibliography.svelte';
+	import FileInput from './File_Input.svelte';
 
 	/** @type {import('$lib/types').Living_Bibliography | undefined} */
 	let bib = $state();
@@ -26,7 +26,7 @@
 				{#if narrative_section['Related source titles'].length > 0}
 					<ul>
 						{#each narrative_section['Related source titles'] as source_title}
-							{@const entry = (bib.entries.find((e) => e.Title === source_title))}
+							{@const entry = bib.entries.find((e) => e.Title === source_title)}
 							<li>{entry.Title}</li>
 						{/each}
 					</ul>
@@ -34,20 +34,7 @@
 			{/each}
 		</section>
 	{/if}
-	<section>
-		<p>
-			{#each required_entry_keys as key}
-				{key}
-			{/each}
-		</p>
-		{#each bib.entries as entry}
-			<p>
-				{#each required_entry_keys as key}
-					{entry[key]}
-				{/each}
-			</p>
-		{/each}
-	</section>
+	<Bibliography entries={bib.entries} />
 {/if}
 
 <footer>
