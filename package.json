@@ -29,6 +29,8 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"read-excel-file": "^5.8.5"
+		"modern-normalize": "^3.0.0",
+		"read-excel-file": "^5.8.5",
+		"the-new-css-reset": "^1.11.3"
 	}
 }
