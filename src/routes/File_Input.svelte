@@ -27,6 +27,9 @@
 
 			if (read_result.ok) {
 				errors = [];
+
+				console.log(read_result.data);
+
 				return on_success(read_result.data);
 			} else {
 				errors = read_result.errors;

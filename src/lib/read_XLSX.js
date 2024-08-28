@@ -50,7 +50,6 @@ export async function read_XLSX(workbook) {
 
 	if (loaded_sheet_names.includes('Bibliography')) {
 		const bib_rows = await readXlsxFile(workbook, { sheet: 'Bibliography' });
-
 		const result = process_bib_rows(bib_rows);
 
 		if (result.ok) {
@@ -60,6 +59,7 @@ export async function read_XLSX(workbook) {
 		}
 	}
 
+	/** @type {import('$lib/types').Narrative_Section[]} */
 	const narrative = [];
 
 	if (loaded_sheet_names.includes('Narrative')) {
@@ -88,10 +88,10 @@ export async function read_XLSX(workbook) {
 			const sections = narrative_rows.slice(1);
 
 			if (can_process_narrative_rows) {
-				/** @type {Partial<import('$lib/types').Narrative_Section>} */
-				const new_section = {};
-
 				for (const section of sections) {
+					/** @type {Partial<import('$lib/types').Narrative_Section>} */
+					const new_section = {};
+
 					for (const [key, offset] of required_narrative_keys_with_offsets) {
 						const value = section[offset];
 
@@ -101,9 +101,9 @@ export async function read_XLSX(workbook) {
 						if (key === 'Related source titles')
 							new_section['Related source titles'] = cell_to_tags(value);
 					}
-				}
 
-				narrative.push(/** @type {import('$lib/types').Narrative_Section} */ (new_section));
+					narrative.push(/** @type {import('$lib/types').Narrative_Section} */ (new_section));
+				}
 			}
 		} else {
 			errors.push('The "Narrative" sheet has no header row');
@@ -119,7 +119,7 @@ export async function read_XLSX(workbook) {
 			`Titles in the "Bibliography" must be unique. Titles with duplicates: ${Array.from(new Set([...entries_with_duplicate_titles.map((e) => e.Title)])).join(', ')}`
 		);
 
-    // Validate narrative section title references
+	// TODO: Validate narrative section title references
 
 	if (errors.length > 0)
 		return {
@@ -153,7 +153,6 @@ function actual_string_or_null(value) {
  * @returns {import('$lib/types').Bib_Rows_Result}
  */
 function process_bib_rows(rows) {
-	console.log(rows);
 	/** @type {import('$lib/types').Entry[]} */
 	const entries = [];
 	const header_row = rows[0];
@@ -193,7 +192,7 @@ function process_bib_rows(rows) {
 
 	const user_defined_keys_with_column_offsets = /** @type {[string, number][]} */ (
 		header_row
-            // @ts-ignore
+			// @ts-ignore
 			.filter((v) => !required_entry_keys.includes(actual_string_or_null(v)))
 			.map((v) => {
 				return [v, header_row.findIndex((c) => c === v)];
