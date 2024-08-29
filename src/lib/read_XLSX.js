@@ -1,12 +1,28 @@
 import readXlsxFile, { readSheetNames } from 'read-excel-file';
-import {
-	required_entry_keys,
-	required_info_keys,
-	required_narrative_keys,
-	required_sheet_names
-} from './constants';
+import { string_or_error, string_or_null, tags, valid_date } from './validators';
 
-/** @typedef {string | number | boolean | typeof Date} Cell */
+export const required_info_keys = /** @type {const} */ ([
+	['Title', string_or_error],
+	['Subtitle', string_or_null],
+	['Authorship', string_or_null]
+]);
+
+export const required_sheet_names = /** @type {const} */ (['Info', 'Bibliography', 'Narrative']);
+export const required_narrative_keys = /** @type {const} */ ([
+	'Heading',
+	'Content',
+	'Related source titles'
+]);
+
+export const required_entry_keys = /** @type {const} */ ([
+	['Title', string_or_error],
+	['Publisher', string_or_error],
+	['Date', string_or_error],
+	['Annotation', string_or_null],
+	['Tags', tags],
+	['Link', string_or_null],
+	['Date updated', valid_date]
+]);
 
 /**
  * @param {ArrayBuffer} workbook
@@ -33,15 +49,22 @@ export async function read_XLSX(workbook) {
 	if (loaded_sheet_names.includes('Info')) {
 		const info_rows = await readXlsxFile(workbook, { sheet: 'Info' });
 
-		for (const key of required_info_keys) {
+		for (const [key, validator] of required_info_keys) {
 			const row = info_rows.find((r) => r[0] == key);
 
 			if (row === undefined) {
-				errors.push(`"${key}" row is missing from "Info" sheet`);
+				errors.push(`A row with "${key}" in the first column is missing from the "Info" sheet`);
 				continue;
 			}
 
-			info[key] = actual_string_or_null(row[1]);
+			const result = validator(row[1]);
+
+			if (result.ok) {
+				info[key] = result.value;
+				continue;
+			}
+
+			errors.push(result.message);
 		}
 	}
 
@@ -95,11 +118,11 @@ export async function read_XLSX(workbook) {
 					for (const [key, offset] of required_narrative_keys_with_offsets) {
 						const value = section[offset];
 
-						if (key == 'Heading') new_section.Heading = actual_string_or_null(value);
+						if (key == 'Heading') new_section.Heading = string_or_null(value).value;
 						// TODO: Handle markdown
-						if (key == 'Content') new_section.Content = actual_string_or_null(value);
+						if (key == 'Content') new_section.Content = string_or_null(value).value;
 						if (key === 'Related source titles')
-							new_section['Related source titles'] = cell_to_tags(value);
+							new_section['Related source titles'] = tags(value).value;
 					}
 
 					narrative.push(/** @type {import('$lib/types').Narrative_Section} */ (new_section));
@@ -120,6 +143,7 @@ export async function read_XLSX(workbook) {
 		);
 
 	// TODO: Validate narrative section title references
+	// TODO: Check narrative headings are unique so I can hash them for anchors
 
 	if (errors.length > 0)
 		return {
@@ -135,17 +159,6 @@ export async function read_XLSX(workbook) {
 			narrative
 		}
 	};
-}
-
-/** @param {unknown} value */
-function actual_string_or_null(value) {
-	if (typeof value !== 'string') return null;
-
-	const v = value.trim();
-
-	if (!v || v === '') return null;
-
-	return v;
 }
 
 /**
@@ -177,7 +190,7 @@ function process_bib_rows(rows) {
 	/** @type {[key: string, offset: number][]} */
 	const required_keys_with_column_offsets = [];
 
-	for (const key of required_entry_keys) {
+	for (const [key] of required_entry_keys) {
 		const offset = header_row.findIndex((c) => c === key);
 
 		if (offset === -1) {
@@ -192,8 +205,14 @@ function process_bib_rows(rows) {
 
 	const user_defined_keys_with_column_offsets = /** @type {[string, number][]} */ (
 		header_row
-			// @ts-ignore
-			.filter((v) => !required_entry_keys.includes(actual_string_or_null(v)))
+			.filter((v) => {
+				const result = string_or_null(v);
+
+				// @ts-ignore
+				if (result.ok) return !required_entry_keys.includes(result.value);
+
+				return true;
+			})
 			.map((v) => {
 				return [v, header_row.findIndex((c) => c === v)];
 			})
@@ -210,13 +229,17 @@ function process_bib_rows(rows) {
 			const entry = {};
 
 			for (const [key, offset] of merged_keys) {
-				const value = row[offset];
+				const cell = row[offset];
+				const validator = required_entry_keys.find((k) => k[0] == key)?.at(1) ?? string_or_null;
+				const result = validator(cell);
 
-				if (key === 'Tags') {
-					entry[key] = cell_to_tags(value);
-				} else {
-					entry[key] = actual_string_or_null(value);
+				if (result.ok) {
+					entry[key] = result.value;
+					continue;
 				}
+
+				// TODO: Enrich this message with a reference to key and row title if available
+				errors.push(result.message);
 			}
 
 			entries.push(/** @type {import('$lib/types').Entry} */ (entry));
@@ -233,11 +256,4 @@ function process_bib_rows(rows) {
 		ok: true,
 		entries
 	};
-}
-
-/** @param {Cell} cell */
-function cell_to_tags(cell) {
-	if (!cell || typeof cell !== 'string') return [];
-
-	return cell.split(';').map((v) => v.trim());
 }

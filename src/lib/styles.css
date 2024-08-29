@@ -1,3 +1,59 @@
+:root {
+	--ochre: #e64626;
+	--accessible-ochre: #ce3d20;
+	--white: #ffffff;
+	--black: #000000;
+	--light-grey: #f1f1f1;
+	--charcoal: #424242;
+	--sandstone: #fcede2;
+	--heritage-rose: #daa8a2;
+	--jacaranda: #8f9ec9;
+	--navy: #1a355e;
+	--eucalypt: #71a499;
+}
+
+html,
+body {
+	height: 100%;
+}
+
+html {
+	font-family: 'Source Sans 3', Arial, Helvetica, sans-serif;
+	/* 18px paragraph size x 1.5 line-height */
+	font-size: 27px;
+}
+
+span,
+p,
+label,
+ul,
+li {
+	font-size: 18px;
+	line-height: 1rem;
+	color: var(--charcoal);
+}
+
+p {
+	margin: 0 0 0.5rem 0;
+}
+
 h1 {
-	color: red;
+	color: var(--ochre);
+	font-size: 1.5rem;
+	font-weight: bold;
+	margin: 0 0 1rem 0;
+}
+
+h2 {
+	font-size: 1rem;
+	font-weight: 500;
+	margin: 0 0 0.5rem 0;
+}
+
+ol {
+	margin-left: 1rem;
+}
+
+ol > li {
+	list-style: decimal;
 }

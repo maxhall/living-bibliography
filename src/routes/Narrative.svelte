@@ -11,7 +11,7 @@
 			<ul>
 				{#each narrative_section['Related source titles'] as source_title}
 					{@const entry = bib.entries.find((e) => e.Title === source_title)}
-					<li>{entry.Title}</li>
+					<li>{entry?.Title}</li>
 				{/each}
 			</ul>
 		{/if}

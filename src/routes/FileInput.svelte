@@ -1,5 +1,6 @@
 <script>
 	import { read_XLSX } from '$lib/read_XLSX';
+	import { slide } from 'svelte/transition';
 
 	/** @type {{on_success: (bib: import('$lib/types').Living_Bibliography) => void}} */
 	let { on_success } = $props();
@@ -49,16 +50,30 @@
 	accept=".xlsx"
 	class="visually-hidden"
 />
-<label class="buttonesque" for="open-file">Load</label>
+<label class="buttonesque" for="open-file">Upload file</label>
+
 {#if errors.length > 0}
-	{#each errors as error_message}
-		<p>{error_message}</p>
-	{/each}
+	<div class="errors" transition:slide>
+		<p>Unable to open bibliography file</p>
+		<ul>
+			{#each errors as error_message}
+				<li>{error_message}</li>
+			{/each}
+		</ul>
+	</div>
 {/if}
 
 <style>
 	label {
+		color: var(--accessible-ochre);
 		user-select: none;
+		width: 100%;
+		background-color: var(--sandstone);
+		border: 2px solid var(--ochre);
+		padding: 0.25rem;
+		display: inline-block;
+		width: fit-content;
+		margin: 0 0 0.5rem 0;
 	}
 
 	.visually-hidden {
@@ -69,8 +84,35 @@
 		clip: rect(1px, 1px, 1px, 1px);
 	}
 
+	input:hover + label,
+	label:hover {
+		background-color: var(--ochre);
+		color: var(--white);
+	}
+
 	input:focus + label {
-		outline: 1px solid grey;
+		outline: 2px solid var(--ochre);
 		outline-offset: 2px;
+	}
+
+	.errors {
+		border: 2px solid var(--ochre);
+		background: var(--white);
+		padding: 0.5rem;
+		margin: 0 0 1rem 0;
+	}
+
+	.errors p {
+		font-weight: 600;
+		color: var(--accessible-ochre);
+	}
+
+	.errors ul {
+		margin-left: 0.5rem;
+	}
+
+	.errors li {
+		color: var(--black);
+		list-style: square;
 	}
 </style>

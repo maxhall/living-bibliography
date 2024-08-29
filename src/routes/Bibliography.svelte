@@ -1,7 +1,6 @@
 <script>
-	import { required_entry_keys } from '$lib/constants';
+	import { required_entry_keys } from '$lib/read_XLSX';
 	import { flip } from 'svelte/animate';
-	import { fade } from 'svelte/transition';
 	/** @type {{entries: import('$lib/types').Entry[]}} */
 	let { entries } = $props();
 
