@@ -21,7 +21,7 @@ export const required_entry_keys = /** @type {const} */ ([
 	['Annotation', string_or_null],
 	['Tags', tags],
 	['Link', string_or_null],
-	['Date updated', valid_date]
+	['Date added to bibliography', valid_date]
 ]);
 
 /**
@@ -208,15 +208,19 @@ function process_bib_rows(rows) {
 			.filter((v) => {
 				const result = string_or_null(v);
 
-				// @ts-ignore
-				if (result.ok) return !required_entry_keys.includes(result.value);
+				if (!result.ok) return false;
 
-				return true;
+				// @ts-ignore
+				const is_required_key = required_entry_keys.map((k) => k[0]).includes(result.value);
+
+				return !is_required_key;
 			})
 			.map((v) => {
 				return [v, header_row.findIndex((c) => c === v)];
 			})
 	);
+
+	console.log(user_defined_keys_with_column_offsets);
 
 	if (can_process_bib_rows) {
 		const merged_keys = [
@@ -224,7 +228,10 @@ function process_bib_rows(rows) {
 			...user_defined_keys_with_column_offsets
 		];
 
-		for (const row of entry_rows) {
+		console.log(merged_keys);
+		for (let i = 0; i < entry_rows.length; i++) {
+			const row = entry_rows[i];
+
 			/** @type {Partial<import('$lib/types').Entry>} */
 			const entry = {};
 
@@ -238,19 +245,22 @@ function process_bib_rows(rows) {
 					continue;
 				}
 
-				// TODO: Enrich this message with a reference to key and row title if available
-				errors.push(result.message);
+				errors.push(
+					`Could not find a value in the required "${key}" column of row ${i + 2} of the "Bibliography" sheet. (${result.message})`
+				);
 			}
 
 			entries.push(/** @type {import('$lib/types').Entry} */ (entry));
 		}
 	}
 
-	if (errors.length > 0)
+	if (errors.length > 0) {
+		console.log(errors);
 		return {
 			ok: false,
 			errors: errors
 		};
+	}
 
 	return {
 		ok: true,

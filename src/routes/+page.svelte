@@ -16,11 +16,11 @@
 		{#if bib}
 			<div class="prose-wrapper">
 				<Header {bib} />
-				<Map />
 				<div class="narrative-wrapper">
 					<Narrative {bib} />
 				</div>
 			</div>
+			<Map />
 			<Bibliography entries={bib.entries} />
 			<Contact />
 			<Footer />

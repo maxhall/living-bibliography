@@ -1,6 +1,8 @@
 <script>
 	import { required_entry_keys } from '$lib/read_XLSX';
 	import { flip } from 'svelte/animate';
+	import SourceCard from './SourceCards.svelte';
+	import SourceCards from './SourceCards.svelte';
 	/** @type {{entries: import('$lib/types').Entry[]}} */
 	let { entries } = $props();
 
@@ -31,42 +33,18 @@
 				{/if}
 			</ul>
 		</div>
-		<div class="cards">
-			{#each selected_entries as entry (entry.Title)}
-				<article class="card" animate:flip={{ duration: 150 }}>
-					<h3>{entry.Title}</h3>
-					<p>{entry.Annotation}</p>
-					{#each required_entry_keys as key}
-						<p>
-							{entry[key]}
-						</p>
-					{/each}
-				</article>
-			{/each}
-		</div>
+		<SourceCards entries={selected_entries} />
 	</div>
 </section>
 
 <style>
 	section {
-		background-color: var(--sandstone);
 		padding: 1rem;
 	}
 
 	.inner {
 		max-width: 40rem;
 		margin: 0 auto;
-	}
-
-	.cards {
-		display: grid;
-		grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-		grid-gap: 1rem;
-	}
-
-	.card {
-		background-color: var(--white);
-		padding: 0.5rem;
 	}
 
 	.tags {
