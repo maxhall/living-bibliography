@@ -1,16 +1,17 @@
 <script>
-	import { required_entry_keys } from '$lib/read_XLSX';
-	import { flip } from 'svelte/animate';
-	import SourceCard from './SourceCards.svelte';
 	import SourceCards from './SourceCards.svelte';
 	/** @type {{entries: import('$lib/types').Entry[]}} */
 	let { entries } = $props();
 
-	let tags = $derived(entries.flatMap((e) => e.Tags));
+	/** @param {string[]} arr */
+	const dedupe_string_array = (arr) => Array.from(new Set([...arr]));
+	/** @param {string[]} arr */
+	const alphabetically = (arr) => arr.toSorted((a, b) => a.localeCompare(b));
+
+	let tags = $derived(alphabetically(dedupe_string_array(entries.flatMap((e) => e.Tags))));
 
 	/** @type {string | null} */
 	let selected_tag = $state(null);
-
 	let selected_entries = $derived(
 		entries.filter((e) => (selected_tag ? e.Tags.includes(selected_tag) : true))
 	);
@@ -49,6 +50,7 @@
 
 	.tags {
 		display: flex;
+		flex-wrap: wrap;
 		gap: 0.25rem;
 	}
 
