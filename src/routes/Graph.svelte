@@ -14,9 +14,6 @@
 
 		computed_nodes = nodes;
 		computed_links = links;
-
-		// console.log(computed_nodes);
-		// console.log(computed_links);
 	});
 
 	/** @param {import("$lib/types").Living_Bibliography} bib*/
@@ -27,17 +24,17 @@
 				'link',
 				forceLink(links)
 					.id((d) => d.id)
-					.strength(0.4)
+					.distance(1)
+					.strength(0.6)
 			)
 			.force('charge', forceManyBody())
-			.force('x', forceX().strength(0.2))
-			.force('y', forceY().strength(0.2));
+			.force('x', forceX().strength(1))
+			.force('y', forceY().strength(1))
+			.stop();
 
-		simulation.on('tick', () => {
-			console.log('Tick!');
-		});
-
-		simulation.tick();
+		for (let i = 0; i < 300; i++) {
+			simulation.tick();
+		}
 
 		return {
 			nodes,
@@ -47,7 +44,7 @@
 </script>
 
 <figure>
-	<svg viewBox="-50 -50 50 50">
+	<svg viewBox="-50 -50 100 100">
 		{#if computed_links}
 			{#each computed_links as l}
 				<line x1={l.source.x} y1={l.source.y} x2={l.target.x} y2={l.target.y} />
@@ -56,7 +53,7 @@
 		{#if computed_nodes}
 			{#each computed_nodes as n}
 				<g class="activity c-{n.type}" transform="translate({n.x}, {n.y})">
-					<circle r={n.radius} />
+					<circle r={n.radius}><title>{n.title}</title></circle>
 				</g>
 			{/each}
 		{/if}
@@ -71,5 +68,13 @@
 
 	figure {
 		max-width: 25rem;
+	}
+
+	.c-source {
+		fill: var(--ochre);
+	}
+
+	.c-tag {
+		fill: var(--heritage-rose);
 	}
 </style>
