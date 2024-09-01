@@ -18,7 +18,7 @@
 			{#if entry.Link}• <a href={entry.Link} target="_blank">Link <ExternalLink size={18} /></a
 				>{/if}
 		</p>
-		<p class="annotation">{entry.Annotation}</p>
+		<p class="tight">{entry.Annotation}</p>
 	</div>
 	<div class="meta">
 		{@render field('Tags', entry.Tags.join(', '))}
@@ -36,11 +36,6 @@
 		border-radius: 0.2rem;
 		display: grid;
 		grid-template-rows: 1fr auto;
-	}
-
-	.annotation {
-		font-size: 0.6rem;
-		line-height: 0.9rem;
 	}
 
 	.meta {

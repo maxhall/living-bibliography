@@ -1,5 +1,6 @@
 <script>
 	import SourceCards from './SourceCards.svelte';
+	import Graph from './Graph.svelte';
 	/** @type {{entries: import('$lib/types').Entry[]}} */
 	let { entries } = $props();
 
@@ -19,21 +20,25 @@
 
 <section>
 	<div class="inner">
-		<h2 id="#bibliography">Bibliography</h2>
-		<div>
-			<p>Filter by tag</p>
-			<ul class="tags">
-				{#each tags as tag}
-					<li class="tag" class:selected={selected_tag === tag}>
-						<button onclick={() => (selected_tag = selected_tag === tag ? null : tag)}>{tag}</button
-						>
-					</li>
-				{/each}
-				{#if selected_tag}
-					<li class="tag"><button onclick={() => (selected_tag = null)}>View all</button></li>
-				{/if}
-			</ul>
+		<div class="bib-header">
+			<h2 id="#bibliography">Bibliography</h2>
+			<div>
+				<p>{entries.length} sources</p>
+				<ul class="tags">
+					{#each tags as tag}
+						<li class="tag" class:selected={selected_tag === tag}>
+							<button onclick={() => (selected_tag = selected_tag === tag ? null : tag)}
+								>{tag}</button
+							>
+						</li>
+					{/each}
+					{#if selected_tag}
+						<li class="tag"><button onclick={() => (selected_tag = null)}>View all</button></li>
+					{/if}
+				</ul>
+			</div>
 		</div>
+		<Graph />
 		<SourceCards entries={selected_entries} />
 	</div>
 </section>
@@ -46,6 +51,18 @@
 	.inner {
 		max-width: 40rem;
 		margin: 0 auto;
+	}
+
+	.bib-header {
+		background-color: var(--sandstone);
+		max-width: 50%;
+		padding: 1rem;
+	}
+
+	h2 {
+		color: var(--ochre);
+		font-size: 1.5rem;
+		font-weight: 700;
 	}
 
 	.tags {

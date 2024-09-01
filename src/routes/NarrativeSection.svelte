@@ -8,45 +8,75 @@
 
 	/** @type {string | null} */
 	let selected_source = $state(null);
+
+	// TODO: This is ridiculous
+	const map_section = section['Related source titles']
+		.map((source_title) => bib_state.bib.entries.find((e) => e.Title === source_title))
+		.find((e) => e?.Latitude);
 </script>
 
-<div class="hmm">
-	<h2>{section.Heading}</h2>
-	{@html section['Markdown content']}
-	{#if section['Related source titles'].length > 0}
-		<ul class="sources">
-			{#each section['Related source titles'] as source_title}
-				{@const entry = bib_state.bib.entries.find((e) => e.Title === source_title)}
-				{@const selected = selected_source === entry.Title}
-				<li class="source-chip" class:selected>
-					<button onclick={() => (selected_source = selected ? null : entry.Title)}>
-						<p>{entry?.Title}</p>
-						<Plus />
-					</button>
-				</li>
-				{#if selected}
-					<div class="source-insert">
-						<SourceCard {entry} />
-					</div>
-				{/if}
-			{/each}
-		</ul>
-	{/if}
+<div class="outer" class:map_section>
+	<div class="inner">
+		{#if section.Heading}<h2>{section.Heading}</h2>{/if}
+		<div class="narrative-content">
+			{@html section['Markdown content']}
+		</div>
+		{#if section['Related source titles'].length > 0}
+			<ul class="sources">
+				{#each section['Related source titles'] as source_title}
+					{@const entry = bib_state.bib.entries.find((e) => e.Title === source_title)}
+					{@const selected = selected_source === entry.Title}
+					<li class="source-chip" class:selected>
+						<button onclick={() => (selected_source = selected ? null : entry.Title)}>
+							<p>{entry?.Title}</p>
+							<Plus />
+						</button>
+					</li>
+					{#if selected}
+						<div class="source-insert">
+							<SourceCard {entry} />
+						</div>
+					{/if}
+				{/each}
+			</ul>
+		{/if}
+	</div>
 </div>
 
 <style>
-	.hmm {
-		max-width: 20rem;
+	.outer {
+		background-color: var(--white);
+		padding: 3rem 0 0 0;
+		display: grid;
+		grid-template-columns: 3fr minmax(auto, 45ch) 1fr;
+		min-height: 100vh;
+	}
+
+	.outer.map_section {
+		background-color: transparent;
+		padding: 10rem 0;
+	}
+
+	.inner {
 		background-color: var(--white);
 		padding: 1rem;
-		margin: 0 auto 10rem auto;
+		grid-column: 2 / 3;
+	}
+
+	:global(.narrative-content li) {
+		list-style: circle;
 	}
 
 	li {
-		color: var(--charcoal);
 		padding: 0.25rem;
-		font-size: 0.6rem;
-		line-height: 1.2;
+		background-color: var(--light-grey);
+	}
+
+	button {
+		height: 100%;
+		width: 100%;
+		display: grid;
+		grid-template-rows: 1fr auto;
 	}
 
 	.sources {
@@ -59,12 +89,6 @@
 
 	.source-insert {
 		grid-column: 1 / -1;
-	}
-	.source-chip {
-		background-color: var(--light-grey);
-		display: grid;
-		grid-template-rows: 1fr auto;
-		height: 100%;
 	}
 
 	.selected,

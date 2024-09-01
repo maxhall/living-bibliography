@@ -157,6 +157,7 @@ export async function read_XLSX(workbook) {
 	// TODO: Validate narrative section title references
 	// TODO: Validate there's lat value whereve a long is present and vice versus
 	// TODO: Check narrative headings are unique so I can hash them for anchors
+	// TODO: Prevent duplicate tags
 
 	if (errors.length > 0)
 		return {
@@ -240,7 +241,6 @@ function process_bib_rows(rows) {
 			...author_defined_keys_with_column_offsets
 		];
 
-		console.log(merged_keys);
 		for (let i = 0; i < entry_rows.length; i++) {
 			const row = entry_rows[i];
 
