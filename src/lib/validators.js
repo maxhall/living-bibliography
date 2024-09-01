@@ -85,3 +85,26 @@ export function valid_date(cell) {
 		message: `${cell} is not a valid date`
 	};
 }
+
+/**
+ * @param {import('$lib/types').Cell} cell
+ * @returns {{ok: true, value: null | number} | {ok: false, message: string}}
+ **/
+export function coordinate_or_null(cell) {
+	if (cell === null)
+		return {
+			ok: true,
+			value: null
+		};
+
+	if (typeof cell !== 'number')
+		return {
+			ok: false,
+			message: 'Latitude and longitude must be numbers'
+		};
+
+	return {
+		ok: true,
+		value: cell
+	};
+}

@@ -14,7 +14,8 @@ export type Cell_Validator<T> = (
 	cell: Cell
 ) => { ok: true; value: T } | { ok: false; message: string };
 
-export type Entry = Record<keyof required_entry_keys, string | null> & {
+// TODO: This type is very broken
+export type Entry = Record<keyof required_entry_keys[0], unknown> & {
 	Tags: string[];
 };
 

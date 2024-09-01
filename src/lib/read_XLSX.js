@@ -1,5 +1,11 @@
 import readXlsxFile, { readSheetNames } from 'read-excel-file';
-import { string_or_error, string_or_null, tags, valid_date } from './validators';
+import {
+	coordinate_or_null,
+	string_or_error,
+	string_or_null,
+	tags,
+	valid_date
+} from './validators';
 import { parse_content_to_markdown } from './utils';
 
 export const required_info_keys = /** @type {const} */ ([
@@ -22,7 +28,9 @@ export const required_entry_keys = /** @type {const} */ ([
 	['Annotation', string_or_null],
 	['Tags', tags],
 	['Link', string_or_null],
-	['Date added to bibliography', valid_date]
+	['Date added to bibliography', valid_date],
+	['Latitude', coordinate_or_null],
+	['Longitude', coordinate_or_null]
 ]);
 
 /**
@@ -147,6 +155,7 @@ export async function read_XLSX(workbook) {
 		);
 
 	// TODO: Validate narrative section title references
+	// TODO: Validate there's lat value whereve a long is present and vice versus
 	// TODO: Check narrative headings are unique so I can hash them for anchors
 
 	if (errors.length > 0)

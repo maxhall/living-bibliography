@@ -41,7 +41,7 @@
 		position: sticky;
 		top: 1rem;
 		grid-column: 1 / 3;
-		margin: 2rem 0 1rem;
+		margin: 0 0 1rem;
 	}
 
 	h1 {
