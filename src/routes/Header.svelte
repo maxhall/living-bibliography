@@ -4,11 +4,14 @@
 
 	let scrollY = $state();
 
-	// const last_updated = $derived(
-	// 	bib.entries.toSorted((a, b) => a['Date updated'] < b['Date updated'])
-	// );
-
-	// console.log(last_updated);
+	// TODO: Handle if there are no bib entries
+	const last_updated = /** @type {Date} */ (
+		bib.entries.toSorted(
+			(a, b) =>
+				/** @type {Date} */ (a['Date added to bibliography']).valueOf() <
+				/** @type {Date} */ (b['Date added to bibliography']).valueOf()
+		)[0]['Date added to bibliography']
+	);
 </script>
 
 <svelte:window bind:scrollY />
@@ -20,12 +23,14 @@
 		<p style="transform: translateX({-20 * Math.min(scrollY / 100, 1)}px)">
 			{bib.info.Subtitle}
 		</p>
-		<p>{bib.info.Authorship}</p>
+		<p>{bib.info.Authorship} • Updated {last_updated.toLocaleDateString()}</p>
+		<p><a href="#bibliography">Go to sources</a></p>
 	</div>
 </header>
 
 <style>
 	header {
+		display: block;
 		background-color: var(--sandstone);
 		width: 100%;
 		height: 15rem;

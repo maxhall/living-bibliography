@@ -6,26 +6,26 @@
 	import Map from './Map.svelte';
 	import Narrative from './Narrative.svelte';
 	import SetSource from './SetSource.svelte';
-
-	/** @type {import('$lib/types').Living_Bibliography | undefined} */
-	let bib = $state();
+	import { bib_state, set_bib } from './state.svelte';
 </script>
 
 <div class="wrapper">
 	<main>
-		{#if bib}
-			<div class="prose-wrapper">
-				<Header {bib} />
-				<div class="narrative-wrapper">
-					<Narrative {bib} />
+		{#if bib_state.bib}
+			<div class="bonk">
+				<Header bib={bib_state.bib} />
+				<Map />
+				<div class="blah">
+					<div class="narrative-wrapper">
+						<Narrative bib={bib_state.bib} />
+					</div>
 				</div>
 			</div>
-			<Map />
-			<Bibliography entries={bib.entries} />
+			<Bibliography entries={bib_state.bib.entries} />
 			<Contact />
 			<Footer />
 		{:else}
-			<SetSource on_success={(new_bib) => (bib = new_bib)} />
+			<SetSource on_success={(new_bib) => set_bib(new_bib)} />
 		{/if}
 	</main>
 </div>
@@ -37,15 +37,16 @@
 		grid-template-rows: 1fr auto;
 	}
 
-	.prose-wrapper {
-		display: grid;
+	.bonk {
 		position: relative;
-		grid-template-columns: 12rem 1fr;
 		max-width: 40rem;
 		margin: 0 auto;
 	}
 
-	.narrative-wrapper {
-		grid-column: 2 / 3;
+	.blah {
+		margin-top: -100vh;
+		padding-bottom: 100vh;
+		z-index: 10;
+		position: sticky;
 	}
 </style>

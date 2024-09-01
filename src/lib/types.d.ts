@@ -18,14 +18,13 @@ export type Entry = Record<keyof required_entry_keys, string | null> & {
 	Tags: string[];
 };
 
-// export type Info = Record<keyof required_info_keys, string | null>;
 export type Info = {
 	[key: keyof required_info_keys]: string | null;
 };
 
 export type Narrative_Section = {
 	Heading: string | null;
-	Content: string | null; // Markdown string
+	'Markdown content': string | null;
 	'Related source titles': string[];
 };
 
@@ -33,6 +32,7 @@ export type Living_Bibliography = {
 	info: Info;
 	narrative: Narrative_Section[];
 	entries: Entry[];
+	author_defined_bibliography_keys: string[];
 };
 
 export type Read_XLSX_Result =
@@ -53,4 +53,5 @@ export type Bib_Rows_Result =
 	| {
 			ok: true;
 			entries: Entry[];
+			author_defined_bibliography_keys: string[];
 	  };

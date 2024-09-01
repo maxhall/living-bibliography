@@ -10,7 +10,7 @@
 	onMount(async () => {
 		const L = (await import('leaflet')).default;
 		// @ts-expect-error
-		map = L.map(map_el).setView([-30, 135], 4);
+		map = L.map(map_el, { scrollWheelZoom: false }).setView([-30, 135], 4);
 
 		L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}.png', {
 			attribution: '©OpenStreetMap, ©CartoDB'
@@ -23,6 +23,8 @@
 
 <style>
 	div {
+		position: sticky;
+		top: 0;
 		height: 100vh;
 		max-height: 50rem;
 	}

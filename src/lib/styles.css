@@ -37,6 +37,14 @@ p {
 	margin: 0 0 0.5rem 0;
 }
 
+a {
+	text-decoration: underline;
+}
+
+a:hover {
+	color: var(--accessible-ochre);
+}
+
 h1 {
 	color: var(--ochre);
 	font-size: 1.5rem;

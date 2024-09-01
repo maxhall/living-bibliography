@@ -19,7 +19,7 @@
 
 <section>
 	<div class="inner">
-		<h2>Bibliography</h2>
+		<h2 id="#bibliography">Bibliography</h2>
 		<div>
 			<p>Filter by tag</p>
 			<ul class="tags">

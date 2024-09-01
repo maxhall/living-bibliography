@@ -1,5 +1,6 @@
 import readXlsxFile, { readSheetNames } from 'read-excel-file';
 import { string_or_error, string_or_null, tags, valid_date } from './validators';
+import { parse_content_to_markdown } from './utils';
 
 export const required_info_keys = /** @type {const} */ ([
 	['Title', string_or_error],
@@ -70,6 +71,8 @@ export async function read_XLSX(workbook) {
 
 	/** @type {import('$lib/types').Entry[]} */
 	let entries = [];
+	/** @type {string[]} */
+	let author_defined_bibliography_keys = [];
 
 	if (loaded_sheet_names.includes('Bibliography')) {
 		const bib_rows = await readXlsxFile(workbook, { sheet: 'Bibliography' });
@@ -77,6 +80,7 @@ export async function read_XLSX(workbook) {
 
 		if (result.ok) {
 			entries = result.entries;
+			author_defined_bibliography_keys = result.author_defined_bibliography_keys;
 		} else {
 			errors.push(...result.errors);
 		}
@@ -119,8 +123,8 @@ export async function read_XLSX(workbook) {
 						const value = section[offset];
 
 						if (key == 'Heading') new_section.Heading = string_or_null(value).value;
-						// TODO: Handle markdown
-						if (key == 'Content') new_section.Content = string_or_null(value).value;
+						if (key == 'Content')
+							new_section['Markdown content'] = parse_content_to_markdown(value);
 						if (key === 'Related source titles')
 							new_section['Related source titles'] = tags(value).value;
 					}
@@ -156,7 +160,8 @@ export async function read_XLSX(workbook) {
 		data: {
 			info,
 			entries,
-			narrative
+			narrative,
+			author_defined_bibliography_keys
 		}
 	};
 }
@@ -203,7 +208,7 @@ function process_bib_rows(rows) {
 		required_keys_with_column_offsets.push([key, offset]);
 	}
 
-	const user_defined_keys_with_column_offsets = /** @type {[string, number][]} */ (
+	const author_defined_keys_with_column_offsets = /** @type {[string, number][]} */ (
 		header_row
 			.filter((v) => {
 				const result = string_or_null(v);
@@ -220,12 +225,10 @@ function process_bib_rows(rows) {
 			})
 	);
 
-	console.log(user_defined_keys_with_column_offsets);
-
 	if (can_process_bib_rows) {
 		const merged_keys = [
 			...required_keys_with_column_offsets,
-			...user_defined_keys_with_column_offsets
+			...author_defined_keys_with_column_offsets
 		];
 
 		console.log(merged_keys);
@@ -264,6 +267,7 @@ function process_bib_rows(rows) {
 
 	return {
 		ok: true,
-		entries
+		entries,
+		author_defined_bibliography_keys: author_defined_keys_with_column_offsets.map((d) => d[0])
 	};
 }
