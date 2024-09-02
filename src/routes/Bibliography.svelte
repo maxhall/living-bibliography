@@ -1,6 +1,7 @@
 <script>
 	import SourceCards from './SourceCards.svelte';
 	import Graph from './Graph.svelte';
+	import { bib_state } from './state.svelte';
 	/** @type {{entries: import('$lib/types').Entry[]}} */
 	let { entries } = $props();
 
@@ -11,10 +12,8 @@
 
 	let tags = $derived(alphabetically(dedupe_string_array(entries.flatMap((e) => e.Tags))));
 
-	/** @type {string | null} */
-	let selected_tag = $state(null);
 	let selected_entries = $derived(
-		entries.filter((e) => (selected_tag ? e.Tags.includes(selected_tag) : true))
+		entries.filter((e) => (bib_state.selected_tag ? e.Tags.includes(bib_state.selected_tag) : true))
 	);
 </script>
 
@@ -26,14 +25,18 @@
 				<p>{entries.length} sources</p>
 				<ul class="tags">
 					{#each tags as tag}
-						<li class="tag" class:selected={selected_tag === tag}>
-							<button onclick={() => (selected_tag = selected_tag === tag ? null : tag)}
+						<li class="tag" class:selected={bib_state.selected_tag === tag}>
+							<button
+								onclick={() =>
+									(bib_state.selected_tag = bib_state.selected_tag === tag ? null : tag)}
 								>{tag}</button
 							>
 						</li>
 					{/each}
-					{#if selected_tag}
-						<li class="tag"><button onclick={() => (selected_tag = null)}>View all</button></li>
+					{#if bib_state.selected_tag}
+						<li class="tag">
+							<button onclick={() => (bib_state.selected_tag = null)}>View all</button>
+						</li>
 					{/if}
 				</ul>
 			</div>
@@ -55,7 +58,6 @@
 
 	.bib-header {
 		background-color: var(--sandstone);
-		max-width: 50%;
 		padding: 1rem;
 	}
 
@@ -72,10 +74,11 @@
 	}
 
 	.tag button {
-		font-size: 16px;
-		padding: 0.25rem;
-		background-color: var(--white);
-		border-radius: 0.25rem;
+		font-size: 0.6rem;
+		line-height: 1;
+		padding: 0.25rem 0.4rem;
+		border: 1px solid var(--charcoal);
+		border-radius: 1rem;
 	}
 
 	.tag.selected button {

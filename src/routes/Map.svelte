@@ -9,6 +9,8 @@
 	let map;
 	/** @type {typeof import('leaflet')}*/
 	let L;
+	/** @type {undefined | import('leaflet').FeatureGroup}*/
+	let marker_group;
 
 	onMount(async () => {
 		L = (await import('leaflet')).default;
@@ -23,7 +25,9 @@
 
 	$effect(() => {
 		bib_state.visible_markers;
+
 		if (!map) return;
+		if (bib_state.visible_markers.length == 0) return;
 
 		/** @type {import('leaflet').Marker[]}*/
 		const visible_markers = bib_state.visible_markers
@@ -31,9 +35,14 @@
 			// @ts-expect-error
 			.map((s) => L.marker([s.Latitude, s.Longitude]));
 
-		const group = L.featureGroup(visible_markers).addTo(map);
+		marker_group?.clearLayers();
+		console.log(visible_markers);
+		marker_group = L.featureGroup(visible_markers).addTo(map);
 
-		map.fitBounds(group.getBounds().pad(0.5));
+		console.log(marker_group);
+
+		map.fitBounds(marker_group.getBounds());
+		// map.fitBounds(marker_group.getBounds().pad(0.5));
 	});
 </script>
 

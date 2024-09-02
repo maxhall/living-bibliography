@@ -6,6 +6,8 @@
 
 	let computed_nodes = $state([]);
 	let computed_links = $state([]);
+	/** @type {string | null} */
+	let highlighted_node = $state(null);
 
 	onMount(() => {
 		if (!bib_state.bib) return;
@@ -53,11 +55,16 @@
 		{#if computed_nodes}
 			{#each computed_nodes as n}
 				<g class="activity c-{n.type}" transform="translate({n.x}, {n.y})">
-					<circle r={n.radius}><title>{n.title}</title></circle>
+					<circle
+						onpointerenter={() => (highlighted_node = n.title)}
+						onpointerleave={() => (highlighted_node = null)}
+						r={n.radius}><title>{n.title}</title></circle
+					>
 				</g>
 			{/each}
 		{/if}
 	</svg>
+	{#if highlighted_node}<p>{highlighted_node}</p>{/if}
 </figure>
 
 <style>
