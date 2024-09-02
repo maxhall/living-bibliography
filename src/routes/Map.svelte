@@ -27,22 +27,20 @@
 		bib_state.visible_markers;
 
 		if (!map) return;
-		if (bib_state.visible_markers.length == 0) return;
+		if (bib_state.visible_markers) {
+			/** @type {import('leaflet').Marker[]}*/
+			const visible_markers = bib_state.visible_markers
+				.filter((s) => typeof s.Latitude == 'number' && typeof s.Longitude == 'number')
+				// @ts-expect-error
+				.map((s) => L.marker([s.Latitude, s.Longitude]));
 
-		/** @type {import('leaflet').Marker[]}*/
-		const visible_markers = bib_state.visible_markers
-			.filter((s) => typeof s.Latitude == 'number' && typeof s.Longitude == 'number')
-			// @ts-expect-error
-			.map((s) => L.marker([s.Latitude, s.Longitude]));
+			marker_group?.clearLayers();
+			marker_group = L.featureGroup(visible_markers).addTo(map);
 
-		marker_group?.clearLayers();
-		console.log(visible_markers);
-		marker_group = L.featureGroup(visible_markers).addTo(map);
+			const bounds = marker_group.getBounds();
 
-		console.log(marker_group);
-
-		map.fitBounds(marker_group.getBounds());
-		// map.fitBounds(marker_group.getBounds().pad(0.5));
+			if (bounds.isValid()) map.fitBounds(bounds);
+		}
 	});
 </script>
 
