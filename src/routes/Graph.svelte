@@ -86,6 +86,7 @@
 		left: 0.5rem;
 		font-weight: 500;
 		color: var(--ochre);
+		max-width: calc(100% - 2rem);
 	}
 
 	line {

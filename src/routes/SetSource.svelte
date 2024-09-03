@@ -6,13 +6,17 @@
 
 <div class="wrapper">
 	<section>
-		<h2>Open a bibliography</h2>
+		<h2>Open a living bibliography</h2>
 		<p>Upload an Excel Workbook.</p>
 		<FileInput {on_success} />
 		<h2>Make your own</h2>
 		<p>A living bibliography is created from data in an Excel Spreadsheet.</p>
 		<ol>
-			<li>Download and fill out <a>the template (XLSX, XXkb)</a></li>
+			<li>
+				Download and fill out <a href="/Living bibliography template.xlsx"
+					>the template (XLSX, 11kb)</a
+				>
+			</li>
 			<li>Upload the file using the button above</li>
 			<li>[TBC] Decide how to publish your bibliography.</li>
 		</ol>
