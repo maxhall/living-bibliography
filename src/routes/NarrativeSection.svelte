@@ -27,6 +27,7 @@
 		padding: 3rem 0 0 0;
 		display: grid;
 		grid-template-columns: 3fr minmax(auto, 45ch) 1fr;
+		min-height: 100vh;
 	}
 
 	.outer.map_section {
@@ -38,6 +39,7 @@
 		background-color: var(--white);
 		padding: 1rem;
 		grid-column: 2 / 3;
+		align-self: start;
 	}
 
 	:global(.narrative-content ul) {

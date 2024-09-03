@@ -12,6 +12,8 @@
 				/** @type {Date} */ (b['Date added to bibliography']).valueOf()
 		)[0]['Date added to bibliography']
 	);
+
+	// style="transform: translateX({-20 * Math.min(scrollY / 100, 1)}px)"
 </script>
 
 <svelte:window bind:scrollY />
@@ -20,7 +22,7 @@
 		<div class="title-wrapper">
 			<h1>{bib.info.Title}</h1>
 		</div>
-		<p style="transform: translateX({-20 * Math.min(scrollY / 100, 1)}px)">
+		<p>
 			{bib.info.Subtitle}
 		</p>
 		<p>{bib.info.Authorship} • Updated {last_updated.toLocaleDateString()}</p>
@@ -41,7 +43,9 @@
 		position: sticky;
 		top: 1rem;
 		grid-column: 1 / 3;
-		margin: 0 0 1rem;
+		margin: 0 auto 1rem;
+		max-width: 40rem;
+		padding-top: 1rem;
 	}
 
 	h1 {

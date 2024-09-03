@@ -56,25 +56,41 @@
 			{#each computed_nodes as n}
 				<g class="activity c-{n.type}" transform="translate({n.x}, {n.y})">
 					<circle
+						class:highlighted={highlighted_node === n.title}
 						onpointerenter={() => (highlighted_node = n.title)}
-						onpointerleave={() => (highlighted_node = null)}
+						onpointerleave={() => {}}
+						onpointerup={() => {
+							highlighted_node = highlighted_node === n.title ? null : n.title;
+						}}
 						r={n.radius}><title>{n.title}</title></circle
 					>
 				</g>
 			{/each}
 		{/if}
 	</svg>
-	{#if highlighted_node}<p>{highlighted_node}</p>{/if}
+	{#if highlighted_node}<p class="graph-label">{highlighted_node}</p>{/if}
 </figure>
 
 <style>
-	line {
-		stroke: var(--sandstone);
-		stroke-width: 0.3;
-	}
-
 	figure {
 		max-width: 25rem;
+		background-color: var(--white);
+		border-radius: 0.5rem;
+		max-width: 12rem;
+		position: relative;
+	}
+
+	.graph-label {
+		position: absolute;
+		top: 0.5rem;
+		left: 0.5rem;
+		font-weight: 500;
+		color: var(--ochre);
+	}
+
+	line {
+		stroke: var(--heritage-rose);
+		stroke-width: 0.3;
 	}
 
 	.c-source {
@@ -83,5 +99,17 @@
 
 	.c-tag {
 		fill: var(--heritage-rose);
+	}
+
+	.c-source:hover,
+	.c-source .highlighted {
+		stroke-width: 1;
+		stroke: var(--jacaranda);
+	}
+
+	.c-tag:hover,
+	.c-tag .highlighted {
+		stroke-width: 0.5;
+		stroke: var(--heritage-rose);
 	}
 </style>

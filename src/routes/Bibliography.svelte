@@ -20,8 +20,8 @@
 <section>
 	<div class="inner">
 		<div class="bib-header">
-			<h2 id="#bibliography">Bibliography</h2>
 			<div>
+				<h2 id="#bibliography">Bibliography</h2>
 				<p>{entries.length} sources</p>
 				<ul class="tags">
 					{#each tags as tag}
@@ -40,8 +40,8 @@
 					{/if}
 				</ul>
 			</div>
+			<Graph />
 		</div>
-		<Graph />
 		<SourceCards entries={selected_entries} />
 	</div>
 </section>
@@ -59,6 +59,10 @@
 	.bib-header {
 		background-color: var(--sandstone);
 		padding: 1rem;
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 1rem;
+		margin-bottom: 1rem;
 	}
 
 	h2 {
@@ -83,5 +87,11 @@
 
 	.tag.selected button {
 		background-color: var(--ochre);
+	}
+
+	@media (max-width: 800px) {
+		.bib-header {
+			grid-template-columns: 1fr;
+		}
 	}
 </style>
