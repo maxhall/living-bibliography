@@ -2,6 +2,7 @@
 	import SourceCards from './SourceCards.svelte';
 	import Graph from './Graph.svelte';
 	import { bib_state } from './state.svelte';
+
 	/** @type {{entries: import('$lib/types').Entry[]}} */
 	let { entries } = $props();
 
@@ -13,7 +14,9 @@
 	let tags = $derived(alphabetically(dedupe_string_array(entries.flatMap((e) => e.Tags))));
 
 	let selected_entries = $derived(
-		entries.filter((e) => (bib_state.selected_tag ? e.Tags.includes(bib_state.selected_tag) : true))
+		entries
+			.filter((e) => (bib_state.selected_tag ? e.Tags.includes(bib_state.selected_tag) : true))
+			.toSorted((a, b) => a.Publisher.localeCompare(b.Publisher))
 	);
 </script>
 
