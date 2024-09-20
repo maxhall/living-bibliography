@@ -24,12 +24,11 @@
 <style>
 	.outer {
 		background-color: var(--white);
-		padding: 3rem 0 0 0;
+		padding: 3rem 0;
 		display: grid;
 		grid-template-columns: 3fr minmax(auto, 45ch) 1fr;
-		min-height: 100vh;
+		min-height: 20rem;
 	}
-
 	.outer.map_section {
 		background-color: transparent;
 		padding: 10rem 0;

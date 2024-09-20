@@ -16,7 +16,7 @@
 		L = (await import('leaflet')).default;
 
 		// @ts-expect-error
-		map = L.map(map_el, { scrollWheelZoom: false }).setView([-30, 135], 4);
+		map = L.map(map_el, { scrollWheelZoom: false, zoomControl: false }).setView([-30, 135], 4);
 
 		L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}.png', {
 			attribution: '©OpenStreetMap, ©CartoDB'
@@ -28,11 +28,14 @@
 
 		if (!map) return;
 		if (bib_state.visible_markers) {
+			const icon = L.divIcon({ className: 'bib-icon' });
 			/** @type {import('leaflet').Marker[]}*/
 			const visible_markers = bib_state.visible_markers
 				.filter((s) => typeof s.Latitude == 'number' && typeof s.Longitude == 'number')
-				// @ts-expect-error
-				.map((s) => L.marker([s.Latitude, s.Longitude]));
+				.map((s) =>
+					// @ts-expect-error
+					L.marker([s.Latitude, s.Longitude], { icon })
+				);
 
 			marker_group?.clearLayers();
 			marker_group = L.featureGroup(visible_markers).addTo(map);
@@ -45,13 +48,33 @@
 </script>
 
 <svelte:window on:resize={() => map?.invalidateSize()} />
-<div bind:this={map_el}></div>
+<div class="wrapper">
+	<div class="inner" bind:this={map_el}></div>
+</div>
 
 <style>
-	div {
-		position: sticky;
+	.wrapper {
+		position: fixed;
 		top: 0;
-		height: 100vh;
-		max-height: 50rem;
+		width: 100%;
+		height: 100%;
+		display: grid;
+		z-index: -10;
+	}
+
+	.inner {
+		align-self: center;
+		height: 30rem;
+		width: 100%;
+		max-height: 30rem;
+		max-width: 40rem;
+		margin: 0 auto;
+	}
+
+	:global(.bib-icon) {
+		height: 1rem;
+		width: 1rem;
+		background-color: var(--ochre);
+		border-radius: 50%;
 	}
 </style>

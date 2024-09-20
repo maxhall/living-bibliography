@@ -12,9 +12,9 @@
 <div class="wrapper">
 	<main>
 		{#if bib_state.bib}
+			<Map />
 			<div class="bonk">
 				<Header bib={bib_state.bib} />
-				<Map />
 				<div class="blah">
 					<div class="narrative-wrapper">
 						<Narrative bib={bib_state.bib} />
@@ -37,14 +37,17 @@
 		grid-template-rows: 1fr auto;
 	}
 
+	main {
+		position: relative;
+	}
+
 	.bonk {
+		max-width: 40rem;
 		position: relative;
 		margin: 0 auto;
 	}
 
 	.blah {
-		margin-top: -100vh;
-		padding-bottom: 100vh;
 		z-index: 10;
 		position: sticky;
 	}
