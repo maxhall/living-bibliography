@@ -26,7 +26,7 @@
 			{bib.info.Subtitle}
 		</p>
 		<p>{bib.info.Authorship} • Updated {last_updated.toLocaleDateString()}</p>
-		<p><a href="#bibliography">Go to sources</a></p>
+		<!-- <p><a href="#bibliography">Go to sources</a></p> -->
 	</div>
 </header>
 

@@ -2,6 +2,7 @@
 	import SourceCards from './SourceCards.svelte';
 	import Graph from './Graph.svelte';
 	import { bib_state } from './state.svelte';
+	import BibMap from './BibMap.svelte';
 
 	/** @type {{entries: import('$lib/types').Entry[]}} */
 	let { entries } = $props();
@@ -44,6 +45,7 @@
 				</ul>
 			</div>
 			<Graph />
+			<BibMap />
 		</div>
 		<SourceCards entries={selected_entries} />
 	</div>

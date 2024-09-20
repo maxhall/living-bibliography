@@ -72,3 +72,10 @@ ol > li {
 	font-size: 0.6rem;
 	line-height: 0.85rem;
 }
+
+.leaflet-control-attribution,
+.leaflet-control-attribution span {
+	font-size: 0.4rem;
+	line-height: 1;
+	padding: 0.1rem;
+}
