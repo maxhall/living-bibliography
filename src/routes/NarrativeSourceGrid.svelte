@@ -40,6 +40,7 @@
 		width: 100%;
 		display: grid;
 		grid-template-rows: 1fr auto;
+		user-select: none;
 	}
 
 	.sources {
