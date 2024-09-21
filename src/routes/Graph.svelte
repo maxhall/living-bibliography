@@ -1,6 +1,5 @@
 <script>
-	import { graph_data_from_bib_state } from '$lib/utils';
-	import { forceLink, forceManyBody, forceSimulation, forceX, forceY } from 'd3-force';
+	import { compute_positions } from '$lib/graph';
 	import { bib_state } from './state.svelte';
 	import { onMount } from 'svelte';
 
@@ -12,35 +11,10 @@
 
 		const { nodes, links } = compute_positions(bib_state.bib);
 
+		console.log(links);
 		computed_nodes = nodes;
 		computed_links = links;
 	});
-
-	/** @param {import("$lib/types").Living_Bibliography} bib*/
-	function compute_positions(bib) {
-		const { nodes, links } = graph_data_from_bib_state(bib);
-		const simulation = forceSimulation(nodes)
-			.force(
-				'link',
-				forceLink(links)
-					.id((d) => d.id)
-					.distance(1)
-					.strength(0.6)
-			)
-			.force('charge', forceManyBody())
-			.force('x', forceX().strength(1))
-			.force('y', forceY().strength(1))
-			.stop();
-
-		for (let i = 0; i < 300; i++) {
-			simulation.tick();
-		}
-
-		return {
-			nodes,
-			links
-		};
-	}
 </script>
 
 <figure>
