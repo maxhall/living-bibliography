@@ -29,11 +29,21 @@
 				<p>{entries.length} sources</p>
 				<ul class="tags">
 					{#each tags as tag}
-						<li class="tag" class:selected={bib_state.selected_tag === tag}>
+						<li
+							class="tag"
+							class:selected={bib_state.selected_tag === tag}
+							class:highlighted={bib_state.highlighted_tag === tag}
+						>
 							<button
-								onclick={() =>
-									(bib_state.selected_tag = bib_state.selected_tag === tag ? null : tag)}
-								>{tag}</button
+								onclick={() => {
+									bib_state.selected_tag = bib_state.selected_tag === tag ? null : tag;
+								}}
+								onpointerenter={() => {
+									bib_state.highlighted_tag = tag;
+								}}
+								onpointerleave={() => {
+									bib_state.highlighted_tag = null;
+								}}>{tag}</button
 							>
 						</li>
 					{/each}
@@ -45,7 +55,7 @@
 				</ul>
 			</div>
 			<Graph />
-			<BibMap />
+			<BibMap entries={selected_entries} />
 		</div>
 		<SourceCards entries={selected_entries} />
 	</div>
@@ -93,6 +103,10 @@
 
 	.tag.selected button {
 		background-color: var(--ochre);
+	}
+
+	.tag.highlighted button {
+		background-color: aqua;
 	}
 
 	@media (max-width: 800px) {

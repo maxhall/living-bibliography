@@ -6,8 +6,6 @@
 
 	let computed_nodes = $state([]);
 	let computed_links = $state([]);
-	/** @type {string | null} */
-	let highlighted_node = $state(null);
 
 	onMount(() => {
 		if (!bib_state.bib) return;
@@ -56,11 +54,18 @@
 			{#each computed_nodes as n}
 				<g class="activity c-{n.type}" transform="translate({n.x}, {n.y})">
 					<circle
-						class:highlighted={highlighted_node === n.title}
-						onpointerenter={() => (highlighted_node = n.title)}
-						onpointerleave={() => {}}
+						class:selected={n.type === 'tag' && bib_state.selected_tag === n.title}
+						class:highlighted={bib_state.highlighted_tag === n.title}
+						onpointerenter={() => {
+							if (n.type === 'tag') bib_state.highlighted_tag = n.title;
+						}}
+						onpointerleave={() => {
+							bib_state.highlighted_tag = null;
+						}}
 						onpointerup={() => {
-							highlighted_node = highlighted_node === n.title ? null : n.title;
+							if (n.type === 'tag') {
+								bib_state.selected_tag = bib_state.selected_tag === n.title ? null : n.title;
+							}
 						}}
 						r={n.radius}><title>{n.title}</title></circle
 					>
@@ -68,7 +73,7 @@
 			{/each}
 		{/if}
 	</svg>
-	{#if highlighted_node}<p class="graph-label">{highlighted_node}</p>{/if}
+	<!-- {#if highlighted_node}<p class="graph-label">{highlighted_node}</p>{/if} -->
 </figure>
 
 <style>
@@ -112,5 +117,6 @@
 	.c-tag .highlighted {
 		stroke-width: 0.5;
 		stroke: var(--heritage-rose);
+		fill: var(--ochre);
 	}
 </style>

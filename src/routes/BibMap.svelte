@@ -1,8 +1,9 @@
 <script>
 	import { onMount } from 'svelte';
-	import { bib_state } from './state.svelte';
 	import 'leaflet/dist/leaflet.css';
 
+	/** @type {{entries: import('$lib/types').Entry[]}}*/
+	let { entries } = $props();
 	/** @type {undefined | HTMLDivElement} */
 	let map_el;
 	/** @type {undefined | import('leaflet').Map}*/
@@ -24,23 +25,22 @@
 	});
 
 	$effect(() => {
-		bib_state.visible_markers;
+		entries;
 
 		if (!map) return;
-		if (bib_state.visible_markers) {
-			/** @type {import('leaflet').Marker[]}*/
-			const visible_markers = bib_state.visible_markers
-				.filter((s) => typeof s.Latitude == 'number' && typeof s.Longitude == 'number')
-				// @ts-expect-error
-				.map((s) => L.marker([s.Latitude, s.Longitude]));
 
-			marker_group?.clearLayers();
-			marker_group = L.featureGroup(visible_markers).addTo(map);
+		/** @type {import('leaflet').Marker[]}*/
+		const visible_markers = entries
+			.filter((e) => typeof e.Latitude == 'number' && typeof e.Longitude == 'number')
+			// @ts-expect-error
+			.map((e) => L.marker([e.Latitude, e.Longitude]));
 
-			const bounds = marker_group.getBounds();
+		marker_group?.clearLayers();
+		marker_group = L.featureGroup(visible_markers).addTo(map);
 
-			if (bounds.isValid()) map.fitBounds(bounds);
-		}
+		const bounds = marker_group.getBounds();
+
+		if (bounds.isValid()) map.fitBounds(bounds);
 	});
 </script>
 

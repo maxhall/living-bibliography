@@ -21,7 +21,7 @@
 </script>
 
 {#if bib.narrative.length > 0}
-	<Scrolly bind:value={scroll_value}>
+	<Scrolly bind:value={scroll_value} bottom={-250}>
 		{#each bib.narrative as section}
 			<NarrativeSection {section} />
 		{/each}
