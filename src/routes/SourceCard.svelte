@@ -37,6 +37,11 @@
 		height: 100%;
 		background-color: var(--light-grey);
 		padding: 0.5rem;
+		transition: transform 60ms linear;
+	}
+
+	article:hover {
+		transform: scale(1.025);
 	}
 
 	.featured {

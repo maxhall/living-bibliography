@@ -17,6 +17,7 @@
 		entries.filter((e) => typeof e.Latitude == 'number' && typeof e.Longitude == 'number')
 			.length === 0
 	);
+
 	onMount(async () => {
 		L = (await import('leaflet')).default;
 
@@ -28,19 +29,30 @@
 		L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}.png', {
 			attribution: '©OpenStreetMap, ©CartoDB'
 		}).addTo(map);
+
+		set_markers();
 	});
 
 	$effect(() => {
 		entries;
 
+		set_markers();
+	});
+
+	function set_markers() {
 		if (!map) return;
 
 		const icon = L.divIcon({ className: 'bib-icon' });
 		/** @type {import('leaflet').Marker[]}*/
 		const visible_markers = entries
 			.filter((e) => typeof e.Latitude == 'number' && typeof e.Longitude == 'number')
-			// @ts-expect-error
-			.map((e) => L.marker([e.Latitude, e.Longitude], { icon }));
+			.map((e) =>
+				// @ts-expect-error
+				L.marker([e.Latitude, e.Longitude], { icon }).bindPopup(e.Title, {
+					className: 'map-popup',
+					closeButton: false
+				})
+			);
 
 		marker_group?.clearLayers();
 		marker_group = L.featureGroup(visible_markers).addTo(map);
@@ -48,7 +60,7 @@
 		const bounds = marker_group.getBounds();
 
 		if (bounds.isValid()) map.fitBounds(bounds);
-	});
+	}
 </script>
 
 <svelte:window on:resize={() => map?.invalidateSize()} />
@@ -61,6 +73,6 @@
 	}
 
 	.blur {
-		filter: blur(4px);
+		filter: blur(2px);
 	}
 </style>

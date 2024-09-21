@@ -30,8 +30,10 @@
 					{#if bib_state.highlighted_source}
 						{bib_state.highlighted_source}
 					{:else}
-						{#if bib_state.selected_tag}{selected_entries.length}/{/if}{entries.length}
-						sources
+						<span class="dot dot-source"></span>
+						{#if bib_state.selected_tag}{selected_entries.length}/{/if}{entries.length} sources
+						<span class="dot dot-tag"></span>
+						{tags.length} tags
 						{#if bib_state.selected_tag}
 							• <button class="link-button" onclick={() => (bib_state.selected_tag = null)}
 								>View all</button
@@ -98,6 +100,20 @@
 		text-overflow: ellipsis;
 	}
 
+	.dot {
+		display: inline-block;
+		width: 10px;
+		height: 10px;
+		border-radius: 50%;
+	}
+
+	.dot-source {
+		background-color: var(--ochre);
+	}
+
+	.dot-tag {
+		background-color: var(--heritage-rose);
+	}
 	.tags {
 		display: flex;
 		flex-wrap: wrap;

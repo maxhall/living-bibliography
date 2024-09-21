@@ -77,4 +77,9 @@
 		background-color: var(--ochre);
 		border-radius: 50%;
 	}
+
+	:global(.bib-icon:hover) {
+		outline: 1px solid var(--ochre);
+		outline-offset: 2px;
+	}
 </style>
