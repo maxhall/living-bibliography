@@ -38,11 +38,13 @@ p {
 	margin: 0 0 0.5rem 0;
 }
 
-a {
+a,
+.link-button {
 	text-decoration: underline;
 }
 
-a:hover {
+a:hover,
+.link-button:hover {
 	color: var(--accessible-ochre);
 }
 

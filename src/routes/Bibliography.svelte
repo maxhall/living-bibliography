@@ -23,10 +23,23 @@
 
 <section>
 	<div class="inner">
+		<h2 id="#bibliography">Bibliography</h2>
 		<div class="bib-header">
 			<div>
-				<h2 id="#bibliography">Bibliography</h2>
-				<p>{entries.length} sources</p>
+				<p class="meta-text">
+					{#if bib_state.highlighted_source}
+						{bib_state.highlighted_source}
+					{:else}
+						{#if bib_state.selected_tag}{selected_entries.length}/{/if}{entries.length}
+						sources
+						{#if bib_state.selected_tag}
+							• <button class="link-button" onclick={() => (bib_state.selected_tag = null)}
+								>View all</button
+							>
+						{/if}
+					{/if}
+				</p>
+				<Graph />
 				<ul class="tags">
 					{#each tags as tag}
 						<li
@@ -47,14 +60,8 @@
 							>
 						</li>
 					{/each}
-					{#if bib_state.selected_tag}
-						<li class="tag">
-							<button onclick={() => (bib_state.selected_tag = null)}>View all</button>
-						</li>
-					{/if}
 				</ul>
 			</div>
-			<Graph />
 			<BibMap entries={selected_entries} />
 		</div>
 		<SourceCards entries={selected_entries} />
@@ -73,10 +80,8 @@
 	}
 
 	.bib-header {
-		background-color: var(--sandstone);
-		padding: 1rem;
 		display: grid;
-		grid-template-columns: 1fr 1fr;
+		grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
 		gap: 1rem;
 		margin-bottom: 1rem;
 	}
@@ -87,10 +92,16 @@
 		font-weight: 700;
 	}
 
+	.meta-text {
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+
 	.tags {
 		display: flex;
 		flex-wrap: wrap;
-		gap: 0.25rem;
+		gap: 0.2rem;
 	}
 
 	.tag button {
@@ -99,14 +110,19 @@
 		padding: 0.25rem 0.4rem;
 		border: 1px solid var(--charcoal);
 		border-radius: 1rem;
+		user-select: none;
 	}
 
 	.tag.selected button {
 		background-color: var(--ochre);
+		border-color: var(--ochre);
+		color: var(--white);
 	}
 
 	.tag.highlighted button {
-		background-color: aqua;
+		background-color: var(--sandstone);
+		border-color: var(--ochre);
+		color: var(--ochre);
 	}
 
 	@media (max-width: 800px) {

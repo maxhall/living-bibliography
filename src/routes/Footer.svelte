@@ -10,6 +10,9 @@
 </footer>
 
 <style>
+	footer {
+		background-color: var(--sandstone);
+	}
 	.inner {
 		padding: 1rem 0;
 		max-width: 40rem;

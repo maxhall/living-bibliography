@@ -13,11 +13,17 @@
 	/** @type {undefined | import('leaflet').FeatureGroup}*/
 	let marker_group;
 
+	let blur = $derived(
+		entries.filter((e) => typeof e.Latitude == 'number' && typeof e.Longitude == 'number')
+			.length === 0
+	);
 	onMount(async () => {
 		L = (await import('leaflet')).default;
 
 		// @ts-expect-error
-		map = L.map(map_el, { scrollWheelZoom: false }).setView([-30, 135], 4);
+		map = L.map(map_el, { scrollWheelZoom: false, zoomControl: false }).setView([-30, 135], 4);
+
+		new L.Control.Zoom({ position: 'topright' }).addTo(map);
 
 		L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}.png', {
 			attribution: '©OpenStreetMap, ©CartoDB'
@@ -29,11 +35,12 @@
 
 		if (!map) return;
 
+		const icon = L.divIcon({ className: 'bib-icon' });
 		/** @type {import('leaflet').Marker[]}*/
 		const visible_markers = entries
 			.filter((e) => typeof e.Latitude == 'number' && typeof e.Longitude == 'number')
 			// @ts-expect-error
-			.map((e) => L.marker([e.Latitude, e.Longitude]));
+			.map((e) => L.marker([e.Latitude, e.Longitude], { icon }));
 
 		marker_group?.clearLayers();
 		marker_group = L.featureGroup(visible_markers).addTo(map);
@@ -45,13 +52,15 @@
 </script>
 
 <svelte:window on:resize={() => map?.invalidateSize()} />
-<div bind:this={map_el}></div>
+<div class:blur bind:this={map_el}></div>
 
 <style>
 	div {
-		position: sticky;
-		top: 0;
 		width: 100%;
 		height: 10rem;
+	}
+
+	.blur {
+		filter: blur(4px);
 	}
 </style>
