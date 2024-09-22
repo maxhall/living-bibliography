@@ -123,7 +123,7 @@
 		grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
 		gap: 1rem;
 		align-items: end;
-		margin-bottom: 1rem;
+		margin-bottom: 0.5rem;
 		border-bottom: 4px solid var(--ochre);
 	}
 

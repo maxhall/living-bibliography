@@ -41,7 +41,7 @@
 	}
 
 	article:hover {
-		transform: scale(1.025);
+		transform: scale(1.02);
 	}
 
 	.featured {

@@ -11,7 +11,7 @@
 
 <style>
 	footer {
-		background-color: var(--sandstone);
+		background-color: var(--white);
 	}
 	.inner {
 		padding: 1rem 0;

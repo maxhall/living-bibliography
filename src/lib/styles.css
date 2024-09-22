@@ -44,6 +44,7 @@ p {
 a,
 .link-button {
 	text-decoration: underline;
+	text-underline-offset: 3px;
 }
 
 a:hover,
