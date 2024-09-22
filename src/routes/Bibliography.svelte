@@ -188,11 +188,10 @@
 	}
 
 	.map-wrapper {
-		background-color: var(--sandstone);
-		padding: 0.5rem;
+		background-color: var(--light-grey);
 		height: 100%;
 		display: grid;
-		align-items: end;
+		align-items: center;
 	}
 
 	@media (max-width: 800px) {

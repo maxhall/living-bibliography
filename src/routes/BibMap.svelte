@@ -22,7 +22,7 @@
 		L = (await import('leaflet')).default;
 
 		// @ts-expect-error
-		map = L.map(map_el, { scrollWheelZoom: false, zoomControl: false }).setView([-30, 135], 4);
+		map = L.map(map_el, { zoomControl: false }).setView([-30, 135], 4);
 
 		new L.Control.Zoom({ position: 'topright' }).addTo(map);
 
