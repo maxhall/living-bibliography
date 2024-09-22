@@ -31,12 +31,16 @@
 </header>
 
 <style>
+	header {
+		background-color: var(--white);
+	}
+
 	.inner {
 		align-self: start;
 		position: sticky;
 		top: 1rem;
 		grid-column: 1 / 3;
-		margin: 0 auto 1rem;
+		margin: 0 auto;
 		max-width: 40rem;
 		padding-top: 1rem;
 		border-bottom: 4px solid var(--ochre);

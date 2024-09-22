@@ -32,7 +32,6 @@
 
 		const { nodes, links } = compute_positions(bib_state.bib);
 
-		console.log(links);
 		computed_nodes = nodes;
 		computed_links = links;
 	});
@@ -134,5 +133,15 @@
 
 	line.selected {
 		stroke: var(--heritage-rose);
+	}
+
+	.c-tag circle:hover {
+		stroke-width: 1;
+		stroke: var(--heritage-rose);
+	}
+
+	.c-source circle:hover {
+		stroke-width: 1;
+		stroke: var(--ochre);
 	}
 </style>

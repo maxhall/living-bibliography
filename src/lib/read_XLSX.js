@@ -268,6 +268,7 @@ function process_bib_rows(rows) {
 
 	if (errors.length > 0) {
 		console.log(errors);
+
 		return {
 			ok: false,
 			errors: errors

@@ -13,9 +13,9 @@
 	<ul class="sources">
 		{#each source_titles as source_title}
 			{@const entry = bib_state.bib.entries.find((e) => e.Title === source_title)}
-			{@const selected = selected_source === entry.Title}
+			{@const selected = selected_source === entry?.Title}
 			<li class="source-chip" class:selected>
-				<button onclick={() => (selected_source = selected ? null : entry.Title)}>
+				<button onclick={() => (selected_source = selected ? null : entry?.Title)}>
 					<p class="tight">{entry?.Title}</p>
 					<Plus />
 				</button>

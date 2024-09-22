@@ -7,7 +7,7 @@
 
 	// TODO: This is ridiculous
 	const map_section = section['Related source titles']
-		.map((source_title) => bib_state.bib.entries.find((e) => e.Title === source_title))
+		.map((source_title) => bib_state.bib.entries.find((e) => e?.Title === source_title))
 		.find((e) => e?.Latitude);
 </script>
 
