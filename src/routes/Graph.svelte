@@ -36,6 +36,27 @@
 		computed_nodes = nodes;
 		computed_links = links;
 	});
+
+	/**
+	 * @param {string} title
+	 * @param {'source' | 'tag'} type
+	 **/
+	function get_fill(title, type) {
+		if (!bib_state.selected_tag && type === 'tag') return `var(--heritage-rose)`;
+		if (!bib_state.selected_tag && type === 'source') return `var(--ochre)`;
+		if (bib_state.selected_tag && type == 'tag' && title === bib_state.selected_tag)
+			return `var(--heritage-rose)`;
+
+		if (type === 'source') {
+			const has_selected_tag = bib_state.bib?.entries
+				.find((e) => e.Title === title)
+				?.Tags.includes(bib_state.selected_tag);
+
+			if (has_selected_tag) return `var(--ochre)`;
+		}
+
+		return `var(--light-grey)`;
+	}
 </script>
 
 <figure style="max-width: {scale_factor * 12}rem">
@@ -55,13 +76,9 @@
 		{/if}
 		{#if computed_nodes}
 			{#each computed_nodes as n}
-				<g class="activity c-{n.type}" transform="translate({n.x}, {n.y})">
+				<g class="c-{n.type}" transform="translate({n.x}, {n.y})">
 					<circle
-						class:selected={(n.type === 'tag' && bib_state.selected_tag === n.title) ||
-							(bib_state.selected_tag &&
-								bib_state.bib?.entries.find((e) => e.Tags.includes(bib_state.selected_tag)))}
-						class:highlighted={bib_state.highlighted_tag === n.title}
-						class:nah={bib_state.selected_tag && bib_state.selected_tag !== n.title}
+						style="fill: {get_fill(n.title, n.type)}"
 						onpointerenter={() => {
 							if (n.type === 'tag') bib_state.highlighted_tag = n.title;
 							if (n.type === 'source') bib_state.highlighted_source = n.title;
@@ -111,33 +128,11 @@
 		stroke-width: 0.5;
 	}
 
-	.nah {
+	line.nah {
 		stroke: var(--light-grey);
-		fill: var(--light-grey);
 	}
 
 	line.selected {
-		stroke: var(--ochre);
-	}
-
-	.c-source {
-		fill: var(--ochre);
-	}
-
-	.c-tag {
-		fill: var(--heritage-rose);
-	}
-
-	.c-source:hover,
-	.c-source .highlighted {
-		stroke-width: 1;
-		stroke: var(--jacaranda);
-	}
-
-	.c-tag:hover,
-	.c-tag .highlighted {
-		stroke-width: 0.5;
 		stroke: var(--heritage-rose);
-		fill: var(--ochre);
 	}
 </style>

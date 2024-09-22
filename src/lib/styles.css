@@ -105,17 +105,17 @@ ol > li {
 	text-decoration: none;
 }
 
+.tag.highlighted button,
+.rounded-link:hover {
+	background-color: var(--sandstone);
+	border-color: var(--ochre);
+	color: var(--ochre);
+}
+
 .tag.selected button,
 .rounded-link:focus,
 .rounded-link:active {
 	background-color: var(--ochre);
 	border-color: var(--ochre);
 	color: var(--white);
-}
-
-.tag.highlighted button,
-.rounded-link:hover {
-	background-color: var(--sandstone);
-	border-color: var(--ochre);
-	color: var(--ochre);
 }
