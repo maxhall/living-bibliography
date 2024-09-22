@@ -31,7 +31,7 @@
 			</p>
 		</div>
 		<div class="controls">
-			<div>
+			<div class="first-column">
 				<Graph />
 				<p class="meta-text">
 					{#if bib_state.highlighted_source}
@@ -74,7 +74,7 @@
 					{/each}
 				</ul>
 			</div>
-			<div>
+			<div class="map-wrapper">
 				<BibMap entries={selected_entries} />
 			</div>
 		</div>
@@ -94,7 +94,11 @@
 	}
 
 	.title {
-		margin-bottom: 1rem;
+		border-bottom: 4px solid var(--ochre);
+		display: flex;
+		align-items: end;
+		gap: 0.5rem;
+		padding-bottom: 0.25rem;
 	}
 
 	h2 {
@@ -107,6 +111,7 @@
 	.info-text {
 		display: inline-flex;
 		align-items: center;
+		margin: 0;
 	}
 
 	.info-text span {
@@ -119,8 +124,11 @@
 		gap: 1rem;
 		align-items: end;
 		margin-bottom: 1rem;
-		padding-bottom: 0.5rem;
-		border-bottom: 1px solid var(--charcoal);
+		border-bottom: 4px solid var(--ochre);
+	}
+
+	.first-column {
+		padding: 1rem 0 0.5rem 0;
 	}
 
 	.meta-text {
@@ -179,9 +187,22 @@
 		color: var(--ochre);
 	}
 
+	.map-wrapper {
+		background-color: var(--sandstone);
+		padding: 0.5rem;
+		height: 100%;
+		display: grid;
+		align-items: end;
+	}
+
 	@media (max-width: 800px) {
-		.bib-header {
+		.controls {
 			grid-template-columns: 1fr;
+			gap: 0;
+		}
+
+		.title {
+			display: block;
 		}
 	}
 </style>
