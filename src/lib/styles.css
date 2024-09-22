@@ -10,6 +10,9 @@
 	--jacaranda: #8f9ec9;
 	--navy: #1a355e;
 	--eucalypt: #71a499;
+
+	--narrative-width: 50rem;
+	--narrative-map-max-height: 30rem;
 }
 
 html,

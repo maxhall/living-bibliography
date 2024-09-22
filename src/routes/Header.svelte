@@ -22,22 +22,15 @@
 		<div class="title-wrapper">
 			<h1>{bib.info.Title}</h1>
 		</div>
-		<p>
+		<p class="subtitle">
 			{bib.info.Subtitle}
 		</p>
-		<p>{bib.info.Authorship} • Updated {last_updated.toLocaleDateString()}</p>
+		<p class="tight">{bib.info.Authorship} • Updated {last_updated.toLocaleDateString()}</p>
 		<!-- <p><a href="#bibliography">Go to sources</a></p> -->
 	</div>
 </header>
 
 <style>
-	header {
-		display: block;
-		background-color: var(--sandstone);
-		width: 100%;
-		height: 15rem;
-	}
-
 	.inner {
 		align-self: start;
 		position: sticky;
@@ -46,6 +39,7 @@
 		margin: 0 auto 1rem;
 		max-width: 40rem;
 		padding-top: 1rem;
+		border-bottom: 4px solid var(--ochre);
 	}
 
 	h1 {
@@ -55,5 +49,17 @@
 
 	.scrolled h1 {
 		font-size: 1rem;
+	}
+
+	.subtitle {
+		font-size: 0.9rem;
+		font-weight: 350;
+		margin-bottom: 3rem;
+	}
+
+	@media (max-width: 80rem) {
+		header {
+			margin: 0 1rem 1rem;
+		}
 	}
 </style>

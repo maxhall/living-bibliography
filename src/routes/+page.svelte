@@ -38,7 +38,7 @@
 	}
 
 	.narrative-wrapper {
-		max-width: 40rem;
+		max-width: var(--narrative-width);
 		margin: 0 auto;
 	}
 </style>

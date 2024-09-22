@@ -64,10 +64,10 @@
 
 	.inner {
 		align-self: center;
-		height: 25rem;
+		height: var(--narrative-map-max-height);
 		width: 100%;
-		max-height: 30rem;
-		max-width: 40rem;
+		max-height: var(--narrative-map-max-height);
+		max-width: var(--narrative-width);
 		margin: 0 auto;
 	}
 
