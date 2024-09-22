@@ -132,7 +132,7 @@
 	}
 
 	.meta-text {
-		white-space: nowrap;
+		/* white-space: nowrap; */
 		overflow: hidden;
 		text-overflow: ellipsis;
 		margin: 0.25rem 0;
