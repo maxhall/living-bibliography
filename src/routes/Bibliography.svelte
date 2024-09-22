@@ -3,6 +3,7 @@
 	import Graph from './Graph.svelte';
 	import { bib_state } from './state.svelte';
 	import BibMap from './BibMap.svelte';
+	import { Info } from 'lucide-svelte';
 
 	/** @type {{entries: import('$lib/types').Entry[]}} */
 	let { entries } = $props();
@@ -23,25 +24,34 @@
 
 <section>
 	<div class="inner">
-		<h2 id="#bibliography">Bibliography</h2>
-		<div class="bib-header">
+		<div class="title">
+			<h2 id="#bibliography">Bibliography</h2>
+			<p class="tight info-text">
+				<Info size={18} /><span>Interact with the source graph or select a tag to explore.</span>
+			</p>
+		</div>
+		<div class="controls">
 			<div>
+				<Graph />
 				<p class="meta-text">
 					{#if bib_state.highlighted_source}
-						{bib_state.highlighted_source}
+						<span class="dot dot-source">
+							{bib_state.highlighted_source}
+						</span>
 					{:else}
-						<span class="dot dot-source"></span>
-						{#if bib_state.selected_tag}{selected_entries.length}/{/if}{entries.length} sources
-						<span class="dot dot-tag"></span>
-						{tags.length} tags
+						<span class="dot dot-source">
+							{#if bib_state.selected_tag}{selected_entries.length}/{/if}{entries.length} sources
+						</span>
+						<span class="dot dot-tag">
+							{tags.length} tags
+						</span>
 						{#if bib_state.selected_tag}
-							• <button class="link-button" onclick={() => (bib_state.selected_tag = null)}
+							<button class="link-button" onclick={() => (bib_state.selected_tag = null)}
 								>View all</button
 							>
 						{/if}
 					{/if}
 				</p>
-				<Graph />
 				<ul class="tags">
 					{#each tags as tag}
 						<li
@@ -64,7 +74,9 @@
 					{/each}
 				</ul>
 			</div>
-			<BibMap entries={selected_entries} />
+			<div>
+				<BibMap entries={selected_entries} />
+			</div>
 		</div>
 		<SourceCards entries={selected_entries} />
 	</div>
@@ -81,10 +93,7 @@
 		margin: 0 auto;
 	}
 
-	.bib-header {
-		display: grid;
-		grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-		gap: 1rem;
+	.title {
 		margin-bottom: 1rem;
 	}
 
@@ -92,38 +101,67 @@
 		color: var(--ochre);
 		font-size: 1.5rem;
 		font-weight: 700;
+		margin: 0;
+	}
+
+	.info-text {
+		display: inline-flex;
+		align-items: center;
+	}
+
+	.info-text span {
+		margin-left: 0.2rem;
+	}
+
+	.controls {
+		display: grid;
+		grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+		gap: 1rem;
+		align-items: end;
+		margin-bottom: 1rem;
+		padding-bottom: 0.5rem;
+		border-bottom: 1px solid var(--charcoal);
 	}
 
 	.meta-text {
 		white-space: nowrap;
 		overflow: hidden;
 		text-overflow: ellipsis;
+		margin: 0.25rem 0;
 	}
 
 	.dot {
+		margin-right: 0.25rem;
+	}
+
+	.dot::before {
+		content: '';
 		display: inline-block;
-		width: 10px;
-		height: 10px;
+		width: 12px;
+		height: 12px;
+		margin-right: 0.15rem;
 		border-radius: 50%;
+		background-color: currentColor;
 	}
 
 	.dot-source {
-		background-color: var(--ochre);
+		color: var(--ochre);
 	}
 
 	.dot-tag {
-		background-color: var(--heritage-rose);
+		color: var(--heritage-rose);
 	}
+
 	.tags {
 		display: flex;
 		flex-wrap: wrap;
-		gap: 0.2rem;
+		gap: 0.15rem;
 	}
 
 	.tag button {
-		font-size: 0.6rem;
+		font-size: 0.5rem;
 		line-height: 1;
-		padding: 0.25rem 0.4rem;
+		padding: 0.2rem 0.35rem;
 		border: 1px solid var(--charcoal);
 		border-radius: 1rem;
 		user-select: none;

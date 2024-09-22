@@ -5,7 +5,6 @@
 
 	let computed_nodes = $state([]);
 	let computed_links = $state([]);
-
 	let viewBox_elements = $derived.by(() => {
 		const nx = /** @type {number[]} */ (computed_nodes.map((n) => n.x));
 		const ny = /** @type {number[]} */ (computed_nodes.map((n) => n.y));
@@ -84,7 +83,6 @@
 			{/each}
 		{/if}
 	</svg>
-	<!-- {#if highlighted_node}<p class="graph-label">{highlighted_node}</p>{/if} -->
 </figure>
 
 <style>
@@ -92,7 +90,7 @@
 		background-color: var(--white);
 		border-radius: 0.5rem;
 		position: relative;
-		margin: 0.5rem 0 0.5rem 0;
+		margin: 0 auto 1rem;
 	}
 
 	svg {
