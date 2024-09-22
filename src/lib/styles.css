@@ -93,3 +93,29 @@ ol > li {
 .map-popup .leaflet-popup-content {
 	font-size: 0.6rem;
 }
+
+.tag button,
+.rounded-link {
+	font-size: 0.5rem;
+	line-height: 1;
+	padding: 0.2rem 0.35rem;
+	border: 1px solid var(--charcoal);
+	border-radius: 1rem;
+	user-select: none;
+	text-decoration: none;
+}
+
+.tag.selected button,
+.rounded-link:focus,
+.rounded-link:active {
+	background-color: var(--ochre);
+	border-color: var(--ochre);
+	color: var(--white);
+}
+
+.tag.highlighted button,
+.rounded-link:hover {
+	background-color: var(--sandstone);
+	border-color: var(--ochre);
+	color: var(--ochre);
+}

@@ -12,7 +12,7 @@
 				continues and thinking changes. If there are sources you think we should add or you wish to
 				discuss the contents, please get in touch.
 			</p>
-			<p><a href="mailto:policy.lab@sydney.edu.au">Contact us</a></p>
+			<a class="rounded-link" href="mailto:policy.lab@sydney.edu.au">Contact us</a>
 		</div>
 	</div>
 </section>

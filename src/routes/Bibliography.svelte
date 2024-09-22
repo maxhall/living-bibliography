@@ -166,27 +166,6 @@
 		gap: 0.15rem;
 	}
 
-	.tag button {
-		font-size: 0.5rem;
-		line-height: 1;
-		padding: 0.2rem 0.35rem;
-		border: 1px solid var(--charcoal);
-		border-radius: 1rem;
-		user-select: none;
-	}
-
-	.tag.selected button {
-		background-color: var(--ochre);
-		border-color: var(--ochre);
-		color: var(--white);
-	}
-
-	.tag.highlighted button {
-		background-color: var(--sandstone);
-		border-color: var(--ochre);
-		color: var(--ochre);
-	}
-
 	.map-wrapper {
 		background-color: var(--light-grey);
 		height: 100%;
