@@ -3,7 +3,7 @@
 	import Scrolly from '$lib/Scrolly.svelte';
 	import { set_visible_markers } from './state.svelte';
 
-	/** @type {{bib :import('$lib/types').Living_Bibliography}} */
+	/** @type {{bib: import('$lib/types').Living_Bibliography}} */
 	let { bib } = $props();
 
 	let scroll_value = $state();

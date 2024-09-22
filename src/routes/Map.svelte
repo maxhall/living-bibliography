@@ -64,7 +64,7 @@
 
 	.inner {
 		align-self: center;
-		height: 30rem;
+		height: 25rem;
 		width: 100%;
 		max-height: 30rem;
 		max-width: 40rem;

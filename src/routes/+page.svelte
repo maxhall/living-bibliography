@@ -13,13 +13,9 @@
 	<main>
 		{#if bib_state.bib}
 			<Map />
-			<div class="bonk">
+			<div class="narrative-wrapper">
 				<Header bib={bib_state.bib} />
-				<div class="blah">
-					<div class="narrative-wrapper">
-						<Narrative bib={bib_state.bib} />
-					</div>
-				</div>
+				<Narrative bib={bib_state.bib} />
 			</div>
 			<Bibliography entries={bib_state.bib.entries} />
 			<Contact />
@@ -41,14 +37,8 @@
 		position: relative;
 	}
 
-	.bonk {
+	.narrative-wrapper {
 		max-width: 40rem;
-		position: relative;
 		margin: 0 auto;
-	}
-
-	.blah {
-		z-index: 10;
-		position: sticky;
 	}
 </style>
