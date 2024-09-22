@@ -62,8 +62,8 @@
 	}
 
 	@media (max-width: 80rem) {
-		header {
-			margin: 0 1rem 1rem;
+		.inner {
+			padding: 1rem;
 		}
 	}
 </style>
