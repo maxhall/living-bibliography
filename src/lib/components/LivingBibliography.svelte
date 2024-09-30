@@ -5,7 +5,7 @@
 	import Header from './Header.svelte';
 	import Map from './Map.svelte';
 	import Narrative from './Narrative.svelte';
-	import { bib_state } from './state.svelte';
+	import { bib_state } from '$lib/state.svelte';
 </script>
 
 <Map />

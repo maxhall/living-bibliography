@@ -1,6 +1,6 @@
 <script>
 	import { onMount } from 'svelte';
-	import { bib_state } from './state.svelte';
+	import { bib_state } from '$lib/state.svelte';
 	import 'leaflet/dist/leaflet.css';
 
 	/** @type {undefined | HTMLDivElement} */

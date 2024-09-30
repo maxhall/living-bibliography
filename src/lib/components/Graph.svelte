@@ -1,6 +1,6 @@
 <script>
 	import { compute_positions } from '$lib/graph';
-	import { bib_state } from './state.svelte';
+	import { bib_state } from '$lib/state.svelte';
 	import { onMount } from 'svelte';
 
 	let computed_nodes = $state([]);

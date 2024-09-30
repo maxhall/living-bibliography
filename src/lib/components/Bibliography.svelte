@@ -2,7 +2,7 @@
 	import SourceCards from './SourceCards.svelte';
 	import Graph from './Graph.svelte';
 	import BibMap from './BibMap.svelte';
-	import { bib_state } from './state.svelte';
+	import { bib_state } from '$lib/state.svelte';
 	import { Info } from 'lucide-svelte';
 
 	/** @type {{entries: import('$lib/types').Entry[]}} */

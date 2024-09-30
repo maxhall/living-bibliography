@@ -1,7 +1,7 @@
 <script>
 	import { Plus } from 'lucide-svelte';
 	import SourceCard from './SourceCard.svelte';
-	import { bib_state } from './state.svelte';
+	import { bib_state } from '$lib/state.svelte';
 
 	/** @type {{source_titles: string[]}} */
 	let { source_titles } = $props();

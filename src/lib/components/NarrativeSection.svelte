@@ -1,6 +1,6 @@
 <script>
 	import NarrativeSourceGrid from './NarrativeSourceGrid.svelte';
-	import { bib_state } from './state.svelte';
+	import { bib_state } from '$lib/state.svelte';
 
 	/** @type {{section: import('$lib/types').Narrative_Section} */
 	let { section } = $props();

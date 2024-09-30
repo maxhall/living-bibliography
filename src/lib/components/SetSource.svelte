@@ -1,5 +1,5 @@
 <script>
-	import FileInput from './FileInput.svelte';
+	import FileInput from '$lib/components/FileInput.svelte';
 	/** @type {{on_success: (bib: import('$lib/types').Living_Bibliography) => void}} */
 	let { on_success } = $props();
 </script>

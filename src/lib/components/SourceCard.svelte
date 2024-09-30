@@ -1,6 +1,6 @@
 <script>
 	import { ExternalLink } from 'lucide-svelte';
-	import { bib_state } from './state.svelte';
+	import { bib_state } from '$lib/state.svelte';
 
 	/** @type {{entry: import('$lib/types').Entry, featured: boolean}} */
 	let { entry, featured } = $props();

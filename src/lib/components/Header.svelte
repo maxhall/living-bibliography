@@ -4,15 +4,6 @@
 
 	let scrollY = $state();
 
-	// TODO: Handle if there are no bib entries
-	const last_updated = /** @type {Date} */ (
-		bib.entries.toSorted(
-			(a, b) =>
-				/** @type {Date} */ (a['Date added to bibliography']).valueOf() <
-				/** @type {Date} */ (b['Date added to bibliography']).valueOf()
-		)[0]['Date added to bibliography']
-	);
-
 	// style="transform: translateX({-20 * Math.min(scrollY / 100, 1)}px)"
 </script>
 
@@ -25,8 +16,7 @@
 		<p class="subtitle">
 			{bib.info.Subtitle}
 		</p>
-		<p class="tight">{bib.info.Authorship} • Updated {last_updated.toLocaleDateString()}</p>
-		<!-- <p><a href="#bibliography">Go to sources</a></p> -->
+		<p class="tight">{bib.info.Authorship} • Updated [FIX LAST UPDATED]</p>
 	</div>
 </header>
 

@@ -1,6 +1,6 @@
 <script>
 	import { flip } from 'svelte/animate';
-	import SourceCard from './SourceCard.svelte';
+	import SourceCard from '$lib/components/SourceCard.svelte';
 
 	/** @type {{entries: import('$lib/types').Entry[]}}*/
 	let { entries } = $props();

@@ -1,7 +1,7 @@
 <script>
 	import NarrativeSection from './NarrativeSection.svelte';
 	import Scrolly from '$lib/Scrolly.svelte';
-	import { set_visible_markers } from './state.svelte';
+	import { set_visible_markers } from '$lib/state.svelte';
 
 	/** @type {{bib: import('$lib/types').Living_Bibliography}} */
 	let { bib } = $props();
