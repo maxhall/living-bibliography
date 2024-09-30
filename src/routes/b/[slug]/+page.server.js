@@ -1,3 +1,7 @@
+import { read } from '$app/server';
+import Sheet from '$lib/content/Living bibliography demo content-v0.4.xlsx';
+import { readSheetNames } from 'read-excel-file/node';
+
 /** @type {import('$lib/types').Living_Bibliography} */
 const temp_data = {
 	info: {
@@ -418,6 +422,12 @@ const temp_data = {
 
 /** @type {import('./$types').PageServerLoad} */
 export async function load({ params }) {
+	const lol = await read(Sheet).arrayBuffer();
+	const hmm = Buffer.from(lol);
+	const loaded_sheet_names = await readSheetNames(hmm);
+	// const huh = await read_XLSX(lol);
+	console.log(loaded_sheet_names);
+
 	return {
 		bib_data: temp_data
 	};
