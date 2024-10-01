@@ -1,5 +1,5 @@
 import { parse } from 'marked';
-import DOMPurify from 'dompurify';
+import DOMPurify from 'isomorphic-dompurify';
 
 // TODO: Return errors to warn of bad content
 // TODO: Add allowlist

@@ -7,10 +7,13 @@ import {
 } from './validators';
 import { parse_content_to_markdown } from '$lib/utils';
 
+// TODO: Make it possible for key to be option, then set "slug" optional
+// TODO: Validate sheet slug requires lowercase and only dashes and letters
 export const required_info_keys = /** @type {const} */ ([
 	['Title', string_or_error],
 	['Subtitle', string_or_null],
-	['Authorship', string_or_null]
+	['Authorship', string_or_null],
+	['Slug', string_or_null]
 ]);
 
 export const required_sheet_names = /** @type {const} */ (['Info', 'Bibliography', 'Narrative']);

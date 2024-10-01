@@ -1,6 +1,8 @@
 import { read } from '$app/server';
-import Sheet from '$lib/content/Living bibliography demo content-v0.4.xlsx';
-import { readSheetNames } from 'read-excel-file/node';
+import Sheet from '$lib/content/Living bibliography demo content-v0.5.xlsx';
+import { process_XLSX } from '$lib/xlsx/process';
+import { read_XLSX_server } from '$lib/xlsx/read_server';
+import { error } from '@sveltejs/kit';
 
 /** @type {import('$lib/types').Living_Bibliography} */
 const temp_data = {
@@ -422,13 +424,18 @@ const temp_data = {
 
 /** @type {import('./$types').PageServerLoad} */
 export async function load({ params }) {
-	const lol = await read(Sheet).arrayBuffer();
-	const hmm = Buffer.from(lol);
-	const loaded_sheet_names = await readSheetNames(hmm);
-	// const huh = await read_XLSX(lol);
-	console.log(loaded_sheet_names);
+	const array_buffer = await read(Sheet).arrayBuffer();
+	const workbook_data = await read_XLSX_server(Buffer.from(array_buffer));
+	const read_result = await process_XLSX(workbook_data);
 
-	return {
-		bib_data: temp_data
-	};
+	console.log(read_result);
+
+	// TODO: Hardcoded such that only 'demonstration' or 'campus-content' will work right now
+	if (read_result.ok && read_result.data.info.Slug === params.slug) {
+		return {
+			bib_data: temp_data
+		};
+	}
+
+	error(404);
 }

@@ -26,12 +26,7 @@
 			}
 
 			const workbook_data = await read_XLSX_browser(workbook);
-
-			console.log(workbook_data);
-
 			const read_result = await process_XLSX(workbook_data);
-
-			console.log(read_result);
 
 			if (read_result.ok) {
 				errors = [];
