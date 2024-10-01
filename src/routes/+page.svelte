@@ -1,4 +1,5 @@
 <script>
+	import AboutContent from '$lib/components/AboutContent.svelte';
 	import CentredPanel from '$lib/components/CentredPanel.svelte';
 </script>
 
@@ -12,6 +13,8 @@
 		</ul>
 		<h2>Create your own</h2>
 		<p>You can <a href="/viewer">create or view your own Living Bibliography.</a></p>
+		<h2>About</h2>
+		<AboutContent />
 	</div>
 </CentredPanel>
 
