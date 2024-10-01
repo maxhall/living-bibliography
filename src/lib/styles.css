@@ -74,6 +74,10 @@ ol > li {
 	list-style: decimal;
 }
 
+b {
+	font-weight: 650;
+}
+
 .tight {
 	font-size: 0.6rem;
 	line-height: 0.85rem;
@@ -118,4 +122,18 @@ ol > li {
 	background-color: var(--ochre);
 	border-color: var(--ochre);
 	color: var(--white);
+}
+
+.text-content ul {
+	position: relative;
+}
+
+.text-content li {
+	margin-left: 1rem;
+}
+
+.text-content li::before {
+	content: '–';
+	position: absolute;
+	left: 0.25rem;
 }

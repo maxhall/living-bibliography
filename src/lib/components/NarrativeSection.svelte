@@ -14,7 +14,7 @@
 <div class="outer" class:map_section>
 	<div class="inner">
 		{#if section.Heading}<h2>{section.Heading}</h2>{/if}
-		<div class="narrative-content">
+		<div class="text-content">
 			{@html section['Markdown content']}
 		</div>
 		<NarrativeSourceGrid source_titles={section['Related source titles']} />
@@ -40,19 +40,5 @@
 		padding: 1rem;
 		grid-column: 2 / 3;
 		align-self: start;
-	}
-
-	:global(.narrative-content ul) {
-		position: relative;
-	}
-
-	:global(.narrative-content li) {
-		margin-left: 1rem;
-	}
-
-	:global(.narrative-content li::before) {
-		content: '–';
-		position: absolute;
-		left: 0.25rem;
 	}
 </style>
