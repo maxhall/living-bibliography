@@ -15,10 +15,23 @@
 	}
 
 	section {
-		width: 20rem;
+		max-width: 20rem;
 		background-color: var(--sandstone);
-		border-left: 4px solid var(--ochre);
+		border-style: solid;
+		border-color: var(--ochre);
+		border-width: 0px 0px 0px 4px;
 		padding: 1rem;
 		margin: 2rem auto;
+	}
+
+	@media (max-width: 540px) {
+		.wrapper {
+			background-color: var(--sandstone);
+		}
+
+		section {
+			border-width: 4px 0px 0px;
+			margin: 0;
+		}
 	}
 </style>

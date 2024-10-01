@@ -2,14 +2,11 @@
 	/** @type {{bib: import('$lib/types').Living_Bibliography}} */
 	let { bib } = $props();
 
-	let scrollY = $state();
-
 	const datestring = /** @type {Date} */ (bib.info['Date updated']).toLocaleDateString();
 </script>
 
-<svelte:window bind:scrollY />
 <header>
-	<div class="inner" class:scrolled={scrollY > 100}>
+	<div class="inner">
 		<div class="title-wrapper">
 			<h1>{bib.info.Title}</h1>
 		</div>
@@ -26,23 +23,12 @@
 	}
 
 	.inner {
-		align-self: start;
-		position: sticky;
 		top: 1rem;
 		grid-column: 1 / 3;
 		margin: 0 auto;
 		max-width: 40rem;
 		padding-top: 1rem;
 		border-bottom: 4px solid var(--ochre);
-	}
-
-	h1 {
-		position: relative;
-		transition: font-size 200ms linear;
-	}
-
-	.scrolled h1 {
-		font-size: 1rem;
 	}
 
 	.subtitle {
