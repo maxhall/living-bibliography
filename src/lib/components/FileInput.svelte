@@ -1,5 +1,6 @@
 <script>
-	import { read_XLSX } from '$lib/read_XLSX';
+	import { read_XLSX_browser } from '$lib/xlsx/read_client';
+	import { process_XLSX } from '$lib/xlsx/process';
 	import { slide } from 'svelte/transition';
 
 	/** @type {{on_success: (bib: import('$lib/types').Living_Bibliography) => void}} */
@@ -24,12 +25,16 @@
 				return;
 			}
 
-			const read_result = await read_XLSX(workbook);
+			const workbook_data = await read_XLSX_browser(workbook);
+
+			console.log(workbook_data);
+
+			const read_result = await process_XLSX(workbook_data);
+
+			console.log(read_result);
 
 			if (read_result.ok) {
 				errors = [];
-
-				console.log(read_result.data);
 
 				return on_success(read_result.data);
 			} else {

@@ -1,4 +1,5 @@
-import type { required_info_keys, required_entry_keys } from './read_XLSX';
+import type { required_info_keys, required_entry_keys } from './XLSX';
+import type { Row } from 'read-excel-file';
 
 declare const brand: unique symbol;
 
@@ -36,7 +37,7 @@ export type Living_Bibliography = {
 	author_defined_bibliography_keys: string[];
 };
 
-export type Read_XLSX_Result =
+export type Process_XLSX_Result =
 	| {
 			ok: false;
 			errors: string[];
@@ -56,3 +57,10 @@ export type Bib_Rows_Result =
 			entries: Entry[];
 			author_defined_bibliography_keys: string[];
 	  };
+
+export type Workbook_Data = {
+	sheet_names: string[];
+	info_rows: Row[] | null;
+	bib_rows: Row[] | null;
+	narrative_rows: Row[] | null;
+};

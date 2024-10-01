@@ -1,4 +1,3 @@
-import readXlsxFile, { readSheetNames } from 'read-excel-file';
 import {
 	coordinate_or_null,
 	string_or_error,
@@ -6,7 +5,7 @@ import {
 	tags,
 	valid_date
 } from './validators';
-import { parse_content_to_markdown } from './utils';
+import { parse_content_to_markdown } from '$lib/utils';
 
 export const required_info_keys = /** @type {const} */ ([
 	['Title', string_or_error],
@@ -15,6 +14,7 @@ export const required_info_keys = /** @type {const} */ ([
 ]);
 
 export const required_sheet_names = /** @type {const} */ (['Info', 'Bibliography', 'Narrative']);
+
 export const required_narrative_keys = /** @type {const} */ ([
 	'Heading',
 	'Content',
@@ -34,15 +34,14 @@ export const required_entry_keys = /** @type {const} */ ([
 ]);
 
 /**
- * @param {ArrayBuffer} workbook
- * @returns {Promise<import('$lib/types').Read_XLSX_Result>}
+ * @param {import('$lib/types').Workbook_Data} data
+ * @returns {Promise<import('$lib/types').Process_XLSX_Result>}
  **/
-export async function read_XLSX(workbook) {
-	const loaded_sheet_names = await readSheetNames(workbook);
+export async function process_XLSX(data) {
 	const missing_sheet_names = [];
 
 	for (const required_sheet_name of required_sheet_names) {
-		if (!loaded_sheet_names.includes(required_sheet_name))
+		if (!data.sheet_names.includes(required_sheet_name))
 			missing_sheet_names.push(required_sheet_name);
 	}
 
@@ -55,11 +54,9 @@ export async function read_XLSX(workbook) {
 	/** @type {import('$lib/types').Info} */
 	const info = {};
 
-	if (loaded_sheet_names.includes('Info')) {
-		const info_rows = await readXlsxFile(workbook, { sheet: 'Info' });
-
+	if (data.info_rows) {
 		for (const [key, validator] of required_info_keys) {
-			const row = info_rows.find((r) => r[0] == key);
+			const row = data.info_rows.find((r) => r[0] == key);
 
 			if (row === undefined) {
 				errors.push(`A row with "${key}" in the first column is missing from the "Info" sheet`);
@@ -82,9 +79,8 @@ export async function read_XLSX(workbook) {
 	/** @type {string[]} */
 	let author_defined_bibliography_keys = [];
 
-	if (loaded_sheet_names.includes('Bibliography')) {
-		const bib_rows = await readXlsxFile(workbook, { sheet: 'Bibliography' });
-		const result = process_bib_rows(bib_rows);
+	if (data.bib_rows) {
+		const result = process_bib_rows(data.bib_rows);
 
 		if (result.ok) {
 			entries = result.entries;
@@ -97,9 +93,8 @@ export async function read_XLSX(workbook) {
 	/** @type {import('$lib/types').Narrative_Section[]} */
 	const narrative = [];
 
-	if (loaded_sheet_names.includes('Narrative')) {
-		const narrative_rows = await readXlsxFile(workbook, { sheet: 'Narrative' });
-		const header_row = narrative_rows[0];
+	if (data.narrative_rows) {
+		const header_row = data.narrative_rows[0];
 
 		if (header_row) {
 			/** @type {[key: string, offset: number][]} */
@@ -120,7 +115,7 @@ export async function read_XLSX(workbook) {
 				required_narrative_keys_with_offsets.push([key, offset]);
 			}
 
-			const sections = narrative_rows.slice(1);
+			const sections = data.narrative_rows.slice(1);
 
 			if (can_process_narrative_rows) {
 				for (const section of sections) {
