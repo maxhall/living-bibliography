@@ -16,7 +16,7 @@
 		<div class="primary">
 			<h3>{entry.Title}</h3>
 			<p class="tight facts">
-				{entry.Publisher} • {entry.Date}
+				{entry.Publisher}
 				{#if entry.Link}• <a href={entry.Link} target="_blank">Link<ExternalLink size={14} /></a
 					>{/if}
 			</p>

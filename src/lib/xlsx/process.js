@@ -13,6 +13,7 @@ export const required_info_keys = /** @type {const} */ ([
 	['Title', string_or_error],
 	['Subtitle', string_or_null],
 	['Authorship', string_or_null],
+	['Date updated', valid_date],
 	['Slug', string_or_null]
 ]);
 
@@ -27,11 +28,9 @@ export const required_narrative_keys = /** @type {const} */ ([
 export const required_entry_keys = /** @type {const} */ ([
 	['Title', string_or_error],
 	['Publisher', string_or_error],
-	['Date', string_or_error],
 	['Annotation', string_or_null],
 	['Tags', tags],
 	['Link', string_or_null],
-	['Date added to bibliography', valid_date],
 	['Latitude', coordinate_or_null],
 	['Longitude', coordinate_or_null]
 ]);

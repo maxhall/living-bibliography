@@ -4,7 +4,7 @@
 
 	let scrollY = $state();
 
-	// style="transform: translateX({-20 * Math.min(scrollY / 100, 1)}px)"
+	const datestring = /** @type {Date} */ (bib.info['Date updated']).toLocaleDateString();
 </script>
 
 <svelte:window bind:scrollY />
@@ -16,7 +16,7 @@
 		<p class="subtitle">
 			{bib.info.Subtitle}
 		</p>
-		<p class="tight">{bib.info.Authorship} • Updated [FIX LAST UPDATED]</p>
+		<p class="tight">{bib.info.Authorship} • Updated {datestring}</p>
 	</div>
 </header>
 
