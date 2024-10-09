@@ -6,7 +6,7 @@
 	<div class="inner">
 		<NotebookPen absoluteStrokeWidth={true} size={70} strokeWidth={3} color={'var(--ochre)'} />
 		<div class="text">
-			<h2>Get involved</h2>
+			<h2 id="contribute">Get involved</h2>
 			<p>
 				This living bibliography isn't complete. We are adding sources and updating as our work
 				continues and thinking changes.

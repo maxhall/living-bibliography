@@ -16,7 +16,9 @@
 		<p class="subtitle">
 			{bib.info.Subtitle}
 		</p>
-		<p class="tight">{bib.info.Authorship} | Updated {datestring}</p>
+		<p class="tight">
+			{bib.info.Authorship} | Updated {datestring}
+		</p>
 		<p>
 			<span class="dot dot-source">
 				{bib.entries.length} sources
@@ -24,6 +26,7 @@
 			<span class="dot dot-tag">
 				{tag_count} tags
 			</span>
+			<a href="#contribute" class="tight">Contribute</a>
 		</p>
 	</div>
 </header>
