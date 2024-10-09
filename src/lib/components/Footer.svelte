@@ -5,7 +5,7 @@
 <footer>
 	<div class="inner">
 		<p>
-			This page is a <b>living bibliography</b>. You can
+			This is a <b>living bibliography</b>. You can
 			<a href="/">learn more and make your own.</a>
 		</p>
 		<AboutContent />
@@ -19,7 +19,12 @@
 	}
 
 	.inner {
-		padding: 1rem 0;
-		max-width: 45ch;
+		max-width: 40rem;
+		margin: 0 auto;
+	}
+
+	:global(footer .inner > p) {
+		/* padding: 1rem 0; */
+		max-width: 50ch;
 	}
 </style>

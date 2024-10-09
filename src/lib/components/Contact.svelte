@@ -9,8 +9,11 @@
 			<h2>Get involved</h2>
 			<p>
 				This living bibliography isn't complete. We are adding sources and updating as our work
-				continues and thinking changes. If there are sources you think we should add or you wish to
-				discuss the contents, please get in touch.
+				continues and thinking changes.
+			</p>
+			<p>
+				Please do get in touch to suggest related community initiatives, university projects or
+				research that can shape our work.
 			</p>
 			<a class="rounded-link" href="mailto:policy.lab@sydney.edu.au">Contact us</a>
 		</div>
@@ -33,6 +36,7 @@
 
 	h2 {
 		color: var(--ochre);
+		margin-top: 0;
 	}
 
 	.text {

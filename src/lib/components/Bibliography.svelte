@@ -109,13 +109,16 @@
 	}
 
 	.info-text {
-		display: inline-flex;
 		align-items: center;
 		margin: 0;
 	}
 
 	.info-text span {
 		margin-left: 0.2rem;
+	}
+
+	:global(.info-text svg) {
+		transform: translateY(3px);
 	}
 
 	.controls {

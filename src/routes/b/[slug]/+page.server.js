@@ -1,8 +1,6 @@
 import { read } from '$app/server';
 // @ts-expect-error TODO: Add ambient type to fix
-import demo from '$lib/content/Living bibliography demo content-v0.5.xlsx';
-// @ts-expect-error TODO: Add ambient type to fix
-import cc from '$lib/content/2024-10-01 Campus Collaboration Living Bibliography.xlsx';
+import cc from '$lib/content/2024-10-09 Campus Collaboration Living Bibliography.xlsx';
 import { process_XLSX } from '$lib/xlsx/process';
 import { read_XLSX_server } from '$lib/xlsx/read_server';
 import { error } from '@sveltejs/kit';
@@ -13,10 +11,6 @@ export const prerender = true;
 export async function load({ params }) {
 	/** @type {import('$lib/types').Living_Bibliography[]} */
 	const content = [];
-	const a = await load_sheet(demo);
-
-	if (a.ok) content.push(a.data);
-
 	const b = await load_sheet(cc);
 
 	if (b.ok) content.push(b.data);
