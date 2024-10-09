@@ -1,8 +1,11 @@
 <script>
+	import { dedupe_string_array } from '$lib/utils';
+
 	/** @type {{bib: import('$lib/types').Living_Bibliography}} */
 	let { bib } = $props();
 
 	const datestring = /** @type {Date} */ (bib.info['Date updated']).toLocaleDateString();
+	const tag_count = dedupe_string_array(bib.entries.flatMap((e) => e.Tags)).length;
 </script>
 
 <header>
@@ -13,7 +16,15 @@
 		<p class="subtitle">
 			{bib.info.Subtitle}
 		</p>
-		<p class="tight">{bib.info.Authorship} • Updated {datestring}</p>
+		<p class="tight">{bib.info.Authorship} | Updated {datestring}</p>
+		<p>
+			<span class="dot dot-source">
+				{bib.entries.length} sources
+			</span>
+			<span class="dot dot-tag">
+				{tag_count} tags
+			</span>
+		</p>
 	</div>
 </header>
 

@@ -9,3 +9,6 @@ export function parse_content_to_markdown(unsafe_content) {
 		USE_PROFILES: { html: true }
 	});
 }
+
+/** @param {string[]} arr */
+export const dedupe_string_array = (arr) => Array.from(new Set([...arr]));

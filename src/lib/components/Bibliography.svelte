@@ -4,12 +4,11 @@
 	import BibMap from './BibMap.svelte';
 	import { bib_state } from '$lib/state.svelte';
 	import { Info } from 'lucide-svelte';
+	import { dedupe_string_array } from '$lib/utils';
 
 	/** @type {{entries: import('$lib/types').Entry[]}} */
 	let { entries } = $props();
 
-	/** @param {string[]} arr */
-	const dedupe_string_array = (arr) => Array.from(new Set([...arr]));
 	/** @param {string[]} arr */
 	const alphabetically = (arr) => arr.toSorted((a, b) => a.localeCompare(b));
 
@@ -139,28 +138,6 @@
 		overflow: hidden;
 		text-overflow: ellipsis;
 		margin: 0.25rem 0;
-	}
-
-	.dot {
-		margin-right: 0.25rem;
-	}
-
-	.dot::before {
-		content: '';
-		display: inline-block;
-		width: 12px;
-		height: 12px;
-		margin-right: 0.15rem;
-		border-radius: 50%;
-		background-color: currentColor;
-	}
-
-	.dot-source {
-		color: var(--ochre);
-	}
-
-	.dot-tag {
-		color: var(--heritage-rose);
 	}
 
 	.tags {

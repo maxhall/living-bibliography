@@ -138,3 +138,25 @@ b {
 	position: absolute;
 	left: 0.25rem;
 }
+
+.dot {
+	margin-right: 0.25rem;
+}
+
+.dot::before {
+	content: '';
+	display: inline-block;
+	width: 12px;
+	height: 12px;
+	margin-right: 0.15rem;
+	border-radius: 50%;
+	background-color: currentColor;
+}
+
+.dot-source {
+	color: var(--ochre);
+}
+
+.dot-tag {
+	color: var(--heritage-rose);
+}
