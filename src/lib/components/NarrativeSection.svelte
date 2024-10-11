@@ -27,7 +27,8 @@
 		padding: 3rem 0;
 		display: grid;
 		grid-template-columns: 3fr minmax(auto, 45ch) 1fr;
-		min-height: calc(var(--narrative-map-max-height) + 4rem);
+		/* TODO: Restore and fix */
+		/* min-height: calc(var(--narrative-map-max-height) + 4rem); */
 	}
 
 	.outer.map_section {
