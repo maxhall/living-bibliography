@@ -1,4 +1,5 @@
 <script>
+	import { bib_state } from '$lib/state.svelte';
 	import { NotebookPen } from 'lucide-svelte';
 </script>
 
@@ -7,15 +8,13 @@
 		<NotebookPen absoluteStrokeWidth={true} size={70} strokeWidth={3} color={'var(--ochre)'} />
 		<div class="text">
 			<h2 id="contribute">Get involved</h2>
-			<p>
-				This living bibliography isn't complete. We are adding sources and updating as our work
-				continues and thinking changes.
-			</p>
-			<p>
-				Please do get in touch to suggest related community initiatives, university projects or
-				research that can shape our work.
-			</p>
-			<a class="rounded-link" href="mailto:policy.lab@sydney.edu.au">Contact us</a>
+			{@html bib_state.bib?.info['Contact text']}
+			<a
+				class="rounded-link"
+				href="mailto:{bib_state.bib?.info[
+					'Contact email'
+				]}?subject=Living bibliography contribution">Contact us</a
+			>
 		</div>
 	</div>
 </section>

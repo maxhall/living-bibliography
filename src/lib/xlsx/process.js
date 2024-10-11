@@ -14,7 +14,9 @@ export const required_info_keys = /** @type {const} */ ([
 	['Subtitle', string_or_null],
 	['Authorship', string_or_null],
 	['Date updated', valid_date],
-	['Slug', string_or_null]
+	['Slug', string_or_null],
+	['Contact email', string_or_null],
+	['Contact text', string_or_null]
 ]);
 
 export const required_sheet_names = /** @type {const} */ (['Info', 'Bibliography', 'Narrative']);
@@ -66,6 +68,12 @@ export async function process_XLSX(data) {
 			}
 
 			const result = validator(row[1]);
+
+			if (result.ok && key === 'Contact text') {
+				// @ts-expect-error TODO: Fix me
+				info[key] = parse_content_to_markdown(result.value);
+				continue;
+			}
 
 			if (result.ok) {
 				info[key] = result.value;
