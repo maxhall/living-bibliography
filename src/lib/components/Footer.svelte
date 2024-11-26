@@ -11,10 +11,7 @@
 		</p>
 		<AboutContent />
 		<p>
-			<a class="rounded-link" href="#top">Return to top</a><a
-				class="embed"
-				href="{$page.url.href}/embed">Embed</a
-			>
+			<a class="rounded-link" href="#top">Return to top</a>
 		</p>
 	</div>
 </footer>

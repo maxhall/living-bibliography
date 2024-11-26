@@ -15,11 +15,11 @@
 	<main>
 		<p class="details">
 			<LibraryBig size={18} />
-			<span class="ttt">
+			<span>
 				{bib.entries.length} sources
 			</span>
 			<Tags size={18} />
-			<span class="ttt">
+			<span>
 				{tag_count} tags
 			</span>
 		</p>
