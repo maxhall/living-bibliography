@@ -1,12 +1,11 @@
 <script>
-	import { page } from '$app/stores';
 	import AboutContent from './AboutContent.svelte';
 </script>
 
 <footer>
 	<div class="inner">
 		<p>
-			This is a <b>living bibliography</b>. You can
+			This is a living bibliography. You can
 			<a href="/">learn more and make your own.</a>
 		</p>
 		<AboutContent />
