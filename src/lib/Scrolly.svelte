@@ -1,5 +1,10 @@
 <script>
 	/**
+	 * Component used under MIT license from the-pudding/svelte-starter
+	 *
+	 * https://github.com/the-pudding/svelte-starter/blob/main/LICENSE
+	 * https://github.com/the-pudding/svelte-starter/blob/main/src/components/helpers/Scrolly.svelte
+	 *
 	 * This component manages which item is most in view for scroll triggering
 	 * example:
 	 * <Scrolly

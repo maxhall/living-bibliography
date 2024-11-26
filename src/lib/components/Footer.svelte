@@ -9,6 +9,7 @@
 			<a href="/">learn more and make your own.</a>
 		</p>
 		<AboutContent />
+		<a class="rounded-link" href="#top">Return to top</a>
 	</div>
 </footer>
 

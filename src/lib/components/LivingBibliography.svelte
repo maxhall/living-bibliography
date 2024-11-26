@@ -3,12 +3,13 @@
 	import Contact from './Contact.svelte';
 	import Footer from './Footer.svelte';
 	import Header from './Header.svelte';
-	import Map from './Map.svelte';
+	// TODO: Reenable map
+	// import Map from './Map.svelte';
 	import Narrative from './Narrative.svelte';
 	import { bib_state } from '$lib/state.svelte';
 </script>
 
-<Map />
+<!-- <Map /> -->
 <div class="narrative-wrapper">
 	<Header bib={bib_state.bib} />
 	<Narrative bib={bib_state.bib} />

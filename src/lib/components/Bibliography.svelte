@@ -135,6 +135,7 @@
 
 	.meta-text {
 		/* white-space: nowrap; */
+		line-height: 1;
 		overflow: hidden;
 		text-overflow: ellipsis;
 		margin: 0.25rem 0;

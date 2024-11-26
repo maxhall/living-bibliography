@@ -11,7 +11,7 @@
 	<FileInput {on_success} />
 	<p>
 		To view an Excel file containing a living bibliography, click open file. The contents are not
-		shared with anyone else .
+		shared with anyone else.
 	</p>
 	<h2>Create your own</h2>
 	<p>A living bibliography is created from data in a Excel spreadsheet. To make your own:</p>
@@ -25,6 +25,6 @@
 	</ol>
 	<p>
 		We invite University of Sydney colleagues to contact the Sydney Policy Lab to discuss publishing
-		their living biolgraphies on this site.
+		their living biolgraphies on this site. <a href="/">Learn more and see examples.</a>
 	</p>
 </CentredPanel>
