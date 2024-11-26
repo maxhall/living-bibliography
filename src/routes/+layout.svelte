@@ -2,6 +2,10 @@
 	import 'modern-normalize/modern-normalize.css';
 	import 'the-new-css-reset/css/reset.css';
 	import '$lib/styles.css';
+	import { dev } from '$app/environment';
+	import { injectAnalytics } from '@vercel/analytics/sveltekit';
+
+	injectAnalytics({ mode: dev ? 'development' : 'production' });
 </script>
 
 <svelte:head>
