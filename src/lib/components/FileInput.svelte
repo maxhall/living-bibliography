@@ -50,7 +50,7 @@
 	accept=".xlsx"
 	class="visually-hidden"
 />
-<label class="buttonesque" for="open-file">Upload file</label>
+<label for="open-file">Upload file</label>
 
 {#if errors.length > 0}
 	<div class="errors" transition:slide>

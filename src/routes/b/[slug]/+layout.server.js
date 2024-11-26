@@ -7,7 +7,7 @@ import { error } from '@sveltejs/kit';
 
 export const prerender = true;
 
-/** @type {import('./$types').PageServerLoad} */
+/** @type {import('./$types').LayoutServerLoad} */
 export async function load({ params }) {
 	/** @type {import('$lib/types').Living_Bibliography[]} */
 	const content = [];
