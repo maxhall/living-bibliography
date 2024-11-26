@@ -1,4 +1,5 @@
 <script>
+	import { page } from '$app/stores';
 	import AboutContent from './AboutContent.svelte';
 </script>
 
@@ -9,7 +10,12 @@
 			<a href="/">learn more and make your own.</a>
 		</p>
 		<AboutContent />
-		<a class="rounded-link" href="#top">Return to top</a>
+		<p>
+			<a class="rounded-link" href="#top">Return to top</a><a
+				class="embed"
+				href="{$page.url.href}/embed">Embed</a
+			>
+		</p>
 	</div>
 </footer>
 
@@ -27,5 +33,9 @@
 	:global(footer .inner > p) {
 		/* padding: 1rem 0; */
 		max-width: 50ch;
+	}
+
+	.embed {
+		color: white;
 	}
 </style>
