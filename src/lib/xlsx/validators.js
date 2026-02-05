@@ -65,9 +65,14 @@ export function tags(cell) {
 		};
 
 	// TODO: Feels like a bunch could go wrong here
+	// Consider normalising case, or at least warning that tags with
+	// the same content but different cases exist
 	return {
 		ok: true,
-		value: cell.split(';').map((v) => v.trim())
+		value: cell
+			.split(';')
+			.map((v) => v.trim())
+			.filter((v) => v.length > 0)
 	};
 }
 
