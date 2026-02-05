@@ -1,6 +1,8 @@
 <script>
 	import { onMount } from 'svelte';
 	import 'leaflet/dist/leaflet.css';
+	import 'leaflet.markercluster/dist/MarkerCluster.css';
+	import 'leaflet.markercluster/dist/MarkerCluster.Default.css';
 
 	/** @type {{entries: import('$lib/types').Entry[]}}*/
 	let { entries } = $props();
@@ -10,8 +12,8 @@
 	let map;
 	/** @type {typeof import('leaflet')}*/
 	let L;
-	/** @type {undefined | import('leaflet').FeatureGroup}*/
-	let marker_group;
+	/** @type {undefined | import('leaflet').MarkerClusterGroup}*/
+	let markers;
 
 	let blur = $derived(
 		entries.filter((e) => typeof e.Latitude == 'number' && typeof e.Longitude == 'number')
@@ -20,6 +22,7 @@
 
 	onMount(async () => {
 		L = (await import('leaflet')).default;
+		await import('leaflet.markercluster');
 
 		// @ts-expect-error
 		map = L.map(map_el, { zoomControl: false }).setView([-30, 135], 4);
@@ -54,10 +57,9 @@
 				})
 			);
 
-		marker_group?.clearLayers();
-		marker_group = L.featureGroup(visible_markers).addTo(map);
-
-		const bounds = marker_group.getBounds();
+		markers?.clearLayers();
+		markers = L.markerClusterGroup().addLayers(visible_markers).addTo(map);
+		const bounds = markers.getBounds();
 
 		if (bounds.isValid()) map.fitBounds(bounds);
 	}
