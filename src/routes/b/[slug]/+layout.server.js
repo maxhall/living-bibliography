@@ -1,6 +1,6 @@
 import { read } from '$app/server';
 // @ts-expect-error TODO: Add ambient type to fix
-import cc from '$lib/content/2024-10-10 Campus Collaboration Living Bibliography.xlsx';
+import cc from '$lib/content/2026-02-05 Campus Collaboration Living Bibliography.xlsx';
 import { process_XLSX } from '$lib/xlsx/process';
 import { read_XLSX_server } from '$lib/xlsx/read_server';
 import { error } from '@sveltejs/kit';
