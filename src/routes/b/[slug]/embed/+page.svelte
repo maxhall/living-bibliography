@@ -6,8 +6,6 @@
 	let { data } = $props();
 
 	const bib = data.bib_data;
-	console.log(bib);
-	console.log($page.params.slug);
 	const tag_count = dedupe_string_array(bib.entries.flatMap((e) => e.Tags)).length;
 </script>
 
