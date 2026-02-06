@@ -58,7 +58,25 @@
 			);
 
 		markers?.clearLayers();
-		markers = L.markerClusterGroup().addLayers(visible_markers).addTo(map);
+		markers = L.markerClusterGroup({
+			iconCreateFunction: function (cluster) {
+				return L.divIcon({
+					className: 'bib-icon-cluster',
+					html: '<p>' + cluster.getChildCount() + '</p>',
+					iconSize: [26, 26],
+					iconAnchor: [13, 13]
+				});
+			},
+			polygonOptions: {
+				fillColor: 'var(--heritage-rose)',
+				color: 'var(--heritage-rose)',
+				weight: 2,
+				opacity: 1,
+				fillOpacity: 0.5
+			}
+		})
+			.addLayers(visible_markers)
+			.addTo(map);
 		const bounds = markers.getBounds();
 
 		if (bounds.isValid()) map.fitBounds(bounds);
@@ -76,5 +94,27 @@
 
 	.blur {
 		filter: blur(2px);
+	}
+
+	:global(.bib-icon-cluster) {
+		background-color: var(--ochre);
+		border-radius: 50%;
+		display: grid;
+		place-items: center;
+	}
+
+	:global(.bib-icon-cluster:hover) {
+		outline: 2px solid var(--ochre);
+		outline-offset: 2px;
+	}
+
+	:global(.bib-icon-cluster > p) {
+		font-size: 16px;
+		font-weight: 500;
+		color: var(--white);
+		line-height: 1;
+		margin: 0;
+		letter-spacing: -0.25px;
+		transform: translateY(-1.5px);
 	}
 </style>
