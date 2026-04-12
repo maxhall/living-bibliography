@@ -1,38 +1,23 @@
-# create-svelte
+# Living Bibliographies
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/main/packages/create-svelte).
+A tool to explore and share annotated bibliographies, created for the Sydney Policy Lab at the University of Sydney. See an example living bibliography, ["Exploring disagreement and social cohesion at universities,"](https://living-bibliography.vercel.app/b/campus-collaboration) from the Policy Lab's Campus Collaboration.
 
-## Creating a project
-
-If you're seeing this, you've probably already done this step. Congrats!
-
-```bash
-# create a new project in the current directory
-npm create svelte@latest
-
-# create a new project in my-app
-npm create svelte@latest my-app
-```
+Use [the viewer](https://living-bibliography.vercel.app/viewer) to create a living bibliography of your own or view an Excel file containing one.
 
 ## Developing
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+Install dependencies with `pnpm install`.
 
-```bash
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
+Start a development server with `pnpm install`.
 
 ## Building
 
 To create a production version of your app:
 
 ```bash
-npm run build
+pnpm build
 ```
 
-You can preview the production build with `npm run preview`.
+You can preview the production build with `pnpm preview`.
 
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+The app is currently deployed on Vercel.

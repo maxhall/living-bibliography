@@ -25,6 +25,6 @@
 	</ol>
 	<p>
 		We invite University of Sydney colleagues to contact the Sydney Policy Lab to discuss publishing
-		their living biolgraphies on this site. <a href="/">Learn more and see examples.</a>
+		their living bibliographies on this site. <a href="/">Learn more and see examples.</a>
 	</p>
 </CentredPanel>
