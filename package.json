@@ -14,16 +14,16 @@
 	},
 	"devDependencies": {
 		"@sveltejs/adapter-vercel": "^5.10.3",
-		"@sveltejs/kit": "^2.58.0",
+		"@sveltejs/kit": "^2.70.2",
 		"@sveltejs/vite-plugin-svelte": "^4.0.4",
 		"@types/eslint": "^9.6.1",
-		"eslint": "^9.39.4",
+		"eslint": "^9.39.5",
 		"eslint-config-prettier": "^9.1.2",
 		"eslint-plugin-svelte": "^2.46.1",
 		"globals": "^15.15.0",
-		"prettier": "^3.8.3",
-		"prettier-plugin-svelte": "^3.5.1",
-		"svelte": "^5.55.5",
+		"prettier": "^3.9.6",
+		"prettier-plugin-svelte": "^3.5.2",
+		"svelte": "^5.56.8",
 		"svelte-check": "^3.8.6",
 		"typescript": "^5.9.3",
 		"vite": "^5.4.21"
@@ -31,7 +31,7 @@
 	"type": "module",
 	"dependencies": {
 		"@types/d3-force": "^3.0.10",
-		"@types/leaflet": "^1.9.21",
+		"@types/leaflet": "^1.9.22",
 		"@vercel/analytics": "^1.6.1",
 		"d3-force": "^3.0.0",
 		"isomorphic-dompurify": "^2.36.0",
@@ -39,7 +39,7 @@
 		"lucide-svelte": "^0.437.0",
 		"marked": "^14.1.4",
 		"modern-normalize": "^3.0.1",
-		"read-excel-file": "^9.0.6",
+		"read-excel-file": "^9.3.9",
 		"the-new-css-reset": "^1.11.3"
 	},
 	"pnpm": {
